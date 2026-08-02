@@ -5,61 +5,142 @@
 @section('meta_description', 'Encuentra los mejores camiones, furgones y plataformas en venta. Precios competitivos y amplia variedad de vehículos comerciales.')
 
 @section('content')
-<div class="container py-4">
-    
+    <div class="container py-4">
+        
 
-   <div class="bg-primary text-white rounded-4 p-4 p-md-5 mb-5 text-center" 
-     style="background: linear-gradient(135deg, #1a237e 0%, #0d47a1 50%, #006064 100%);">
-    <h1 class="display-5 fw-bold">
-        <i class="fas fa-truck"></i> Encuentra tu Vehículo Ideal
-    </h1>
-    <p class="lead fs-6">Los mejores camiones, furgones y plataformas al mejor precio</p>
-    <p class="mb-3 small">Más de <strong>{{ $vehicles->total() }}</strong> vehículos disponibles</p>
-    
-    <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
-      
-    <!-- ✅ BARRA DE BÚSQUEDA COMPACTA -->
-        <div class="position-relative" style="width: 100%; max-width: 500px;">
-            <form id="searchForm" action="/buscar" method="GET" class="w-100">
-                <div class="input-group" style="border-radius: 50px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                    <span class="input-group-text bg-white border-0 ps-3" style="border-radius: 50px 0 0 50px;">
-                        <i class="fas fa-search text-primary" style="font-size: 0.9rem;"></i>
-                    </span>
-                    <input type="text" 
-                           name="q"
-                           id="searchInput" 
-                           class="form-control border-0 py-2" 
-                           placeholder="🔍 ¿Qué vehículo buscas? (marca, modelo, tipo...)"
-                           autocomplete="off"
-                           style="font-size: 0.9rem;">
-                    <button type="submit" class="btn btn-light border-0 px-4" 
-                            style="border-radius: 0 50px 50px 0; background: white; font-weight: 500; color: #0d6efd;">
-                        <i class="fas fa-search me-1"></i> Buscar
-                    </button>
+        <div class="bg-primary text-white rounded-4 p-4 p-md-5 mb-5 text-center" 
+        style="background: linear-gradient(135deg, #1a237e 0%, #0d47a1 50%, #006064 100%);">
+
+            <h1 class="display-5 fw-bold">
+                <i class="fas fa-truck"></i> Encuentra tu Vehículo Ideal
+            </h1>
+            <p class="lead fs-6">Los mejores camiones, furgones y plataformas al mejor precio</p>
+            <p class="mb-3 small">Más de <strong>{{ $vehicles->total() }}</strong> vehículos disponibles</p>
+            
+            <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
+                <!-- ✅ FORMULARIO DE BÚSQUEDA -->
+                <form id="searchForm" action="/buscar" method="GET" class="w-100" style="max-width: 500px;">
+                    <div class="input-group" style="border-radius: 50px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                        <span class="input-group-text bg-white border-0 ps-3" style="border-radius: 50px 0 0 50px;">
+                            <i class="fas fa-search text-primary" style="font-size: 0.9rem;"></i>
+                        </span>
+                        <input type="text" 
+                            name="q"
+                            id="searchInput" 
+                            class="form-control border-0 py-2" 
+                            placeholder="🔍 ¿Qué vehículo buscas? (marca, modelo, tipo...)"
+                            autocomplete="off"
+                            style="font-size: 0.9rem;">
+                        <button type="submit" class="btn btn-light border-0 px-4" 
+                                style="border-radius: 0 50px 50px 0; background: white; font-weight: 500; color: #0d6efd;">
+                            <i class="fas fa-search me-1"></i> Buscar
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- Botones -->
+                <div class="d-flex gap-2 flex-wrap justify-content-center">
+                    <a href="#vehicles" class="btn btn-light btn-sm px-3 py-1.5" style="font-size: 0.85rem;">
+                        <i class="fas fa-list"></i> Ver Todos
+                    </a>
+                    @auth
+                        @if(auth()->user()->is_admin)
+                            <a href="{{ route('admin.dashboard') }}" class="btn btn-warning btn-sm px-3 py-1.5" style="font-size: 0.85rem;">
+                                <i class="fas fa-cog"></i> Admin
+                            </a>
+                        @endif
+                    @else
+                        <a href="{{ route('register') }}" class="btn btn-outline-light btn-sm px-3 py-1.5" style="font-size: 0.85rem;">
+                            <i class="fas fa-user-plus"></i> Registrarse
+                        </a>
+                    @endauth
                 </div>
-            </form>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <!-- ============================================ -->
+<!-- RESULTADOS DE BÚSQUEDA -->
+<!-- ============================================ -->
+    @if(request()->has('q') && request()->q != '')
+    <section class="mb-5" id="searchResults">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="mb-0">
+                    <i class="fas fa-search text-primary"></i> 
+                    Resultados para: <strong>"{{ request()->q }}"</strong>
+                </h2>
+                <p class="text-muted small mt-1">{{ $vehicles->total() }} vehículo(s) encontrado(s)</p>
+            </div>
+            <a href="{{ route('vehicles.index') }}" class="btn btn-outline-secondary">
+                <i class="fas fa-times"></i> Limpiar búsqueda
+            </a>
         </div>
         
-        <!-- Botones -->
-        <div class="d-flex gap-2 flex-wrap justify-content-center">
-            <a href="#vehicles" class="btn btn-light btn-sm px-3 py-1.5" style="font-size: 0.85rem;">
-                <i class="fas fa-list"></i> Ver Todos
-            </a>
-            @auth
-                @if(auth()->user()->is_admin)
-                    <a href="{{ route('admin.dashboard') }}" class="btn btn-warning btn-sm px-3 py-1.5" style="font-size: 0.85rem;">
-                        <i class="fas fa-cog"></i> Admin
-                    </a>
-                @endif
-            @else
-                <a href="{{ route('register') }}" class="btn btn-outline-light btn-sm px-3 py-1.5" style="font-size: 0.85rem;">
-                    <i class="fas fa-user-plus"></i> Registrarse
+        @if($vehicles->count() > 0)
+            <div class="row">
+                @foreach($vehicles as $vehicle)
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="position-relative">
+                            <div class="img-container">
+                                @if($vehicle->images && count($vehicle->images) > 0)
+                                    <img src="{{ asset('storage/vehicles/' . $vehicle->images[0]) }}" 
+                                        class="img-full" alt="{{ $vehicle->title }}">
+                                @else
+                                    <div class="bg-light d-flex align-items-center justify-content-center" 
+                                        style="height: 200px; width: 100%;">
+                                        <i class="fas fa-truck fa-3x text-muted"></i>
+                                    </div>
+                                @endif
+                            </div>
+                            <span class="position-absolute bottom-0 start-0 badge bg-{{ $vehicle->status_badge }} m-2 p-2">
+                                {{ ucfirst($vehicle->status) }}
+                            </span>
+                            @if($vehicle->featured)
+                                <span class="position-absolute top-0 end-0 badge bg-warning m-2">
+                                    <i class="fas fa-star"></i> Destacado
+                                </span>
+                            @endif
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ Str::limit($vehicle->title, 40) }}</h5>
+                            <p class="text-muted small">
+                                <i class="fas fa-building"></i> {{ $vehicle->brand }}
+                                <i class="fas fa-calendar ms-2"></i> {{ $vehicle->year }}
+                            </p>
+                            <p class="text-primary fw-bold fs-4">{{ $vehicle->price_formatted }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-info">{{ ucfirst($vehicle->type) }}</span>
+                                <a href="/vehiculos/{{ $vehicle->slug }}" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-eye"></i> Ver Detalles
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            
+            <div class="d-flex justify-content-center mt-4">
+                {{ $vehicles->links('pagination::bootstrap-5') }}
+            </div>
+        @else
+            <div class="text-center py-5">
+                <i class="fas fa-search fa-4x text-muted mb-3"></i>
+                <h4>No se encontraron vehículos</h4>
+                <p class="text-muted">No hay resultados para "<strong>{{ request()->q }}</strong>"</p>
+                <a href="{{ route('vehicles.index') }}" class="btn btn-primary">
+                    <i class="fas fa-undo"></i> Ver todos los vehículos
                 </a>
-            @endauth
-        </div>
-
-    </div>
-    </div>
+            </div>
+        @endif
+    </section>
+    @endif
 
    
     <!-- ============================================ -->
@@ -239,14 +320,15 @@
                 </div>
             </div>
         </div>
+
     </section>
 </div>
 
 
 
-<!-- ============================================ -->
-<!-- MODAL DE RESULTADOS DE BÚSQUEDA -->
-<!-- ============================================ -->
+    <!-- ============================================ -->
+    <!-- MODAL DE RESULTADOS DE BÚSQUEDA -->
+    <!-- ============================================ -->
 
 <div class="modal fade" id="searchResultModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
@@ -428,6 +510,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Delegar eventos en las sugerencias
+    
     suggestions.addEventListener('click', function(e) {
         const link = e.target.closest('a[href^="/vehiculos/"]');
         if (link) {
@@ -442,6 +525,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     // BÚSQUEDA CON BOTÓN O ENTER
     // ============================================
+
     function performSearch() {
         const query = searchInput.value.trim();
         if (query.length < 2) {
@@ -500,6 +584,193 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });       
+
+document.addEventListener('DOMContentLoaded', function() {
+    const searchForm = document.getElementById('searchForm');
+    const searchInput = document.getElementById('searchInput');
+    const modal = new bootstrap.Modal(document.getElementById('searchResultModal'));
+    const modalContent = document.getElementById('searchResultContent');
+    let searchTimeout = null;
+    
+    // ============================================
+    // BÚSQUEDA CON MODAL
+    // ============================================
+
+    searchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const query = searchInput.value.trim();
+        if (query.length < 2) {
+            alert('Escribe al menos 2 caracteres para buscar');
+            return;
+        }
+        
+        // Mostrar modal con loading
+        modal.show();
+        modalContent.innerHTML = `
+            <div class="text-center py-4">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Cargando...</span>
+                </div>
+                <p class="mt-2">Buscando vehículos para "<strong>${query}</strong>"...</p>
+            </div>
+        `;
+        
+        // Hacer la petición AJAX
+        fetch(`/buscar?q=${encodeURIComponent(query)}`, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.text())
+        .then(html => {
+            // Extraer solo el grid de vehículos
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = html;
+            const grid = tempDiv.querySelector('#vehicleGrid');
+            
+            if (grid && grid.innerHTML.trim() !== '') {
+                // Mostrar resultados en el modal
+                modalContent.innerHTML = `
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h6>Resultados para: <strong>"${query}"</strong></h6>
+                            <span class="badge bg-primary">${grid.querySelectorAll('.col-md-6').length} vehículos</span>
+                        </div>
+                        <p class="text-muted small">Haz clic en cualquier vehículo para ver más detalles</p>
+                    </div>
+                    ${grid.innerHTML}
+                `;
+                
+                // Agregar eventos a los enlaces de los resultados
+                modalContent.querySelectorAll('a[href^="/vehiculos/"]').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const href = this.getAttribute('href');
+                        modal.hide();
+                        setTimeout(() => {
+                            window.location.href = href;
+                        }, 300);
+                    });
+                });
+            } else {
+                modalContent.innerHTML = `
+                    <div class="text-center py-4">
+                        <i class="fas fa-search fa-3x text-muted d-block mb-3"></i>
+                        <h5>No se encontraron vehículos</h5>
+                        <p class="text-muted">No hay resultados para "<strong>${query}</strong>"</p>
+                        <button class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">
+                            Cerrar
+                        </button>
+                    </div>
+                `;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            modalContent.innerHTML = `
+                <div class="text-center py-4 text-danger">
+                    <i class="fas fa-exclamation-circle fa-3x d-block mb-3"></i>
+                    <h5>Error al buscar</h5>
+                    <p class="text-muted">${error.message}</p>
+                    <button class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">
+                        Cerrar
+                    </button>
+                </div>
+            `;
+        });
+    });
+    
+    // ============================================
+    // SUGERENCIAS EN TIEMPO REAL
+    // ============================================
+
+    if (searchInput) {
+        // Crear contenedor para sugerencias
+        const suggestionsDiv = document.createElement('div');
+        suggestionsDiv.id = 'searchSuggestions';
+        suggestionsDiv.className = 'bg-white rounded-3 shadow-lg mt-1';
+        suggestionsDiv.style.cssText = 'display: none; max-height: 250px; overflow-y: auto; position: absolute; width: 100%; z-index: 1000; border-radius: 12px;';
+        searchInput.parentNode.appendChild(suggestionsDiv);
+        
+        searchInput.addEventListener('input', function() {
+            const query = this.value.trim();
+            
+            clearTimeout(searchTimeout);
+            
+            if (query.length < 2) {
+                suggestionsDiv.style.display = 'none';
+                return;
+            }
+            
+            searchTimeout = setTimeout(function() {
+                fetch(`/buscar?q=${encodeURIComponent(query)}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.text())
+                .then(html => {
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = html;
+                    const grid = tempDiv.querySelector('#vehicleGrid');
+                    
+                    if (grid && grid.innerHTML.trim() !== '') {
+                        const items = grid.querySelectorAll('.col-md-6.col-xl-4');
+                        if (items.length > 0) {
+                            let htmlSuggestions = '<div class="p-2">';
+                            items.forEach(item => {
+                                htmlSuggestions += item.innerHTML;
+                            });
+                            htmlSuggestions += '</div>';
+                            suggestionsDiv.innerHTML = htmlSuggestions;
+                            suggestionsDiv.style.display = 'block';
+                        } else {
+                            suggestionsDiv.innerHTML = `
+                                <div class="p-3 text-center text-muted small">
+                                    <i class="fas fa-search d-block mb-1"></i>
+                                    No se encontraron vehículos para "<strong>${query}</strong>"
+                                </div>
+                            `;
+                            suggestionsDiv.style.display = 'block';
+                        }
+                    } else {
+                        suggestionsDiv.innerHTML = `
+                            <div class="p-3 text-center text-muted small">
+                                <i class="fas fa-search d-block mb-1"></i>
+                                No se encontraron vehículos para "<strong>${query}</strong>"
+                            </div>
+                        `;
+                        suggestionsDiv.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    suggestionsDiv.style.display = 'none';
+                });
+            }, 300);
+        });
+        
+        // Ocultar sugerencias al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !suggestionsDiv.contains(e.target)) {
+                suggestionsDiv.style.display = 'none';
+            }
+        });
+        
+        // Hacer clic en sugerencia = abrir modal con detalle
+        suggestionsDiv.addEventListener('click', function(e) {
+            const link = e.target.closest('a[href^="/vehiculos/"]');
+            if (link) {
+                e.preventDefault();
+                const href = link.getAttribute('href');
+                suggestionsDiv.style.display = 'none';
+                searchInput.value = '';
+                window.location.href = href;
+            }
+        });
+    }
+});
 
 </script>
 @endpush

@@ -111,32 +111,33 @@ class VehicleController extends Controller
 
     public function search(Request $request)
     {
-           $query = Vehicle::available();
+    
+          $query = Vehicle::available();
 
-        if ($request->q) {
-            $searchTerm = $request->q;
-            $query->where(function($q) use ($searchTerm) {
-                $q->where('title', 'like', '%' . $searchTerm . '%')
-                ->orWhere('brand', 'like', '%' . $searchTerm . '%')
-                ->orWhere('model', 'like', '%' . $searchTerm . '%')
-                ->orWhere('type', 'like', '%' . $searchTerm . '%')
-                ->orWhere('description', 'like', '%' . $searchTerm . '%')
-                ->orWhere('year', 'like', '%' . $searchTerm . '%');
-            });
-        }
+    if ($request->q) {
+        $searchTerm = $request->q;
+        $query->where(function($q) use ($searchTerm) {
+            $q->where('title', 'like', '%' . $searchTerm . '%')
+              ->orWhere('brand', 'like', '%' . $searchTerm . '%')
+              ->orWhere('model', 'like', '%' . $searchTerm . '%')
+              ->orWhere('type', 'like', '%' . $searchTerm . '%')
+              ->orWhere('description', 'like', '%' . $searchTerm . '%')
+              ->orWhere('year', 'like', '%' . $searchTerm . '%');
+        });
+    }
 
-        $vehicles = $query->latest()->paginate(12);
-        
-        // Si es AJAX, devolver solo el grid
-        if ($request->ajax()) {
-            return view('components.vehicle-grid', compact('vehicles'))->render();
-        }
+    $vehicles = $query->latest()->paginate(12);
+    
+    // ✅ Para AJAX (sugerencias)
+    if ($request->ajax()) {
+        return view('components.vehicle-grid', compact('vehicles'))->render();
+    }
 
-        // Si es una búsqueda normal
-        $types = Vehicle::select('type')->distinct()->pluck('type');
-        $brands = Vehicle::select('brand')->distinct()->pluck('brand');
-        $recentVehicles = Vehicle::available()->latest()->limit(6)->get();
-        $featuredVehicles = Vehicle::available()->where('featured', true)->latest()->limit(6)->get();
+    // ✅ Para búsqueda normal (página completa)
+    $recentVehicles = Vehicle::available()->latest()->limit(6)->get();
+    $featuredVehicles = Vehicle::available()->where('featured', true)->latest()->limit(6)->get();
+    $types = Vehicle::select('type')->distinct()->pluck('type');
+    $brands = Vehicle::select('brand')->distinct()->pluck('brand');
 
     return view('vehicles.index', compact('vehicles', 'recentVehicles', 'featuredVehicles', 'types', 'brands'));
 
