@@ -56,7 +56,7 @@
 <body>
     <nav class="navbar navbar-dark bg-dark">
         <div class="container">
-            <span class="navbar-brand">Transventas Guatemala</span>
+            <span class="navbar-brand">TransventasGuatemala</span>
             <div>
                 @auth
                     <span class="text-white me-2">{{ auth()->user()->name }}</span>
