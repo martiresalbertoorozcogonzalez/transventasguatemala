@@ -5,7 +5,7 @@
 @section('content')
 
 <!-- ============================================ -->
-<!-- RESULTADOS DE BÚSQUEDA (SOLO BÚSQUEDA) -->
+<!-- RESULTADOS DE BÚSQUEDA -->
 <!-- ============================================ -->
 <section id="resultados" style="padding: 40px 0; background: #f8f9fa; min-height: 70vh;">
     <div class="container">
@@ -18,7 +18,7 @@
                 <p class="text-muted small mt-1">{{ $vehicles->total() }} vehículo(s) encontrado(s)</p>
             </div>
             <a href="{{ route('vehicles.index') }}" class="btn btn-outline-secondary">
-                <i class="fas fa-times"></i> Nueva búsqueda
+                <i class="fas fa-times"></i> Regresar
             </a>
         </div>
         
@@ -31,16 +31,13 @@
                         
                         <div class="position-relative overflow-hidden">
                             <a href="/vehiculos/{{ $vehicle->slug }}">
-                                <div class="img-container">
+                                <div style="width: 100%; height: 220px; background: #ffffff; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; padding: 10px;">
                                     @if($vehicle->images && count($vehicle->images) > 0)
                                         <img src="{{ asset('storage/vehicles/' . $vehicle->images[0]) }}" 
-                                             class="img-full" alt="{{ $vehicle->title }}"
-                                             style="transition: transform 0.5s;">
+                                             alt="{{ $vehicle->title }}"
+                                             style="max-height: 100%; max-width: 100%; object-fit: contain; object-position: center; background: #ffffff;">
                                     @else
-                                        <div class="bg-light d-flex align-items-center justify-content-center" 
-                                             style="height: 200px; width: 100%;">
-                                            <i class="fas fa-truck fa-3x text-muted"></i>
-                                        </div>
+                                        <i class="fas fa-truck fa-3x text-muted" style="color: #6c757d;"></i>
                                     @endif
                                 </div>
                             </a>
@@ -98,24 +95,9 @@
         transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         cursor: pointer;
     }
-    
-    .img-container {
-        width: 100%;
-        height: 200px;
-        background: linear-gradient(135deg, #1a1a3e, #0d1b2a);
-        overflow: hidden;
-        position: relative;
-    }
-    
-    .img-container img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s;
-    }
-    
-    .hover-card:hover .img-container img {
-        transform: scale(1.05);
+    .hover-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.15) !important;
     }
 </style>
 

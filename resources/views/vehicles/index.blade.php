@@ -126,10 +126,10 @@
                 <span class="badge bg-primary">Marca: {{ request('brand') }}</span>
             @endif
             @if(request('min_price'))
-                <span class="badge bg-primary">${{ number_format(request('min_price')) }}</span>
+                <span class="badge bg-primary">Q{{ number_format(request('min_price')) }}</span>
             @endif
             @if(request('max_price'))
-                <span class="badge bg-primary">${{ number_format(request('max_price')) }}</span>
+                <span class="badge bg-primary">Q{{ number_format(request('max_price')) }}</span>
             @endif
             @if(request('year_from'))
                 <span class="badge bg-primary">Desde: {{ request('year_from') }}</span>
@@ -169,10 +169,10 @@
                 <span class="badge bg-primary">Marca: {{ request('brand') }}</span>
             @endif
             @if(request('min_price'))
-                <span class="badge bg-primary">Precio mínimo: ${{ number_format(request('min_price')) }}</span>
+                <span class="badge bg-primary">Q{{ number_format(request('min_price')) }}</span>
             @endif
             @if(request('max_price'))
-                <span class="badge bg-primary">Precio máximo: ${{ number_format(request('max_price')) }}</span>
+                <span class="badge bg-primary">Q{{ number_format(request('max_price')) }}</span>
             @endif
             @if(request('year_from'))
                 <span class="badge bg-primary">Desde: {{ request('year_from') }}</span>
@@ -191,16 +191,13 @@
                         
                         <div class="position-relative overflow-hidden">
                             <a href="/vehiculos/{{ $vehicle->slug }}">
-                                <div class="img-container">
+                                <div style="width: 100%; height: 220px; background: #ffffff; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; padding: 10px;">
                                     @if($vehicle->images && count($vehicle->images) > 0)
                                         <img src="{{ asset('storage/vehicles/' . $vehicle->images[0]) }}" 
-                                             class="img-full" alt="{{ $vehicle->title }}"
-                                             style="transition: transform 0.5s;">
+                                            alt="{{ $vehicle->title }}"
+                                            style="max-height: 100%; max-width: 100%; object-fit: contain; object-position: center; background: #ffffff;">
                                     @else
-                                        <div class="bg-light d-flex align-items-center justify-content-center" 
-                                             style="height: 200px; width: 100%;">
-                                            <i class="fas fa-truck fa-3x text-muted"></i>
-                                        </div>
+                                        <i class="fas fa-truck fa-3x text-muted" style="color: #6c757d;"></i>
                                     @endif
                                 </div>
                             </a>
@@ -275,16 +272,13 @@
                     
                     <div class="position-relative overflow-hidden">
                         <a href="/vehiculos/{{ $vehicle->slug }}">
-                            <div class="img-container">
+                            <div style="width: 100%; height: 220px; background: #ffffff; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; padding: 10px;">
                                 @if($vehicle->images && count($vehicle->images) > 0)
                                     <img src="{{ asset('storage/vehicles/' . $vehicle->images[0]) }}" 
-                                         class="img-full" alt="{{ $vehicle->title }}"
-                                         style="transition: transform 0.5s;">
+                                        alt="{{ $vehicle->title }}"
+                                        style="max-height: 100%; max-width: 100%; object-fit: contain; object-position: center; background: #ffffff;">
                                 @else
-                                    <div class="bg-light d-flex align-items-center justify-content-center" 
-                                         style="height: 200px; width: 100%;">
-                                        <i class="fas fa-truck fa-3x text-muted"></i>
-                                    </div>
+                                    <i class="fas fa-truck fa-3x text-muted" style="color: #6c757d;"></i>
                                 @endif
                             </div>
                         </a>
@@ -374,7 +368,7 @@
                             </div>
                             
                             <div class="mb-3">
-                                <label class="form-label fw-bold">Rango de Precio</label>
+                                <label class="form-label fw-bold">Rango de Precio (Q)</label>
                                 <div class="row g-2">
                                     <div class="col-6">
                                         <input type="number" 
@@ -490,6 +484,10 @@ document.getElementById('filterForm')?.addEventListener('submit', function(e) {
 @endpush
 
 <style>
+    /* ============================================ */
+    /* ESTILOS DE IMÁGENES CORREGIDOS */
+    /* ============================================ */
+    
     .hover-card {
         transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         cursor: pointer;
@@ -507,7 +505,9 @@ document.getElementById('filterForm')?.addEventListener('submit', function(e) {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: center;
         transition: transform 0.5s;
+        display: block;
     }
     
     .hover-card:hover .img-container img {
@@ -519,12 +519,16 @@ document.getElementById('filterForm')?.addEventListener('submit', function(e) {
         overflow: hidden;
     }
     
+    /* RESPONSIVE */
     @media (max-width: 768px) {
         .hero-section {
             min-height: 50vh !important;
         }
         .hero-section h1 {
             font-size: 2rem !important;
+        }
+        .img-container {
+            height: 150px;
         }
     }
 </style>
