@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Str;
 
 class Vehicle extends Model
 {
@@ -15,25 +14,21 @@ class Vehicle extends Model
         'title', 'slug', 'type', 'brand', 'model', 'year',
         'price', 'mileage', 'color', 'engine', 'transmission',
         'fuel_type', 'capacity', 'description', 'features',
-        'images', 'status', 'featured', 'sold_at','views'
+        'images', 'status', 'featured', 'sold_at', 'views'
     ];
 
     protected $casts = [
         'features' => 'array',
         'images' => 'array',
         'price' => 'decimal:2',
-        'year' => 'integer',
-        'mileage' => 'integer',
-        'capacity' => 'integer',
         'featured' => 'boolean',
     ];
 
-      public function getRouteKeyName()
+    public function getRouteKeyName()
     {
         return 'slug';
     }
 
-    // Scopes
     public function scopeAvailable($query)
     {
         return $query->where('status', 'disponible');
@@ -44,15 +39,22 @@ class Vehicle extends Model
         return $query->where('featured', true);
     }
 
-    public function scopeType($query, $type)
-    {
-        return $query->where('type', $type);
-    }
-
-    // Accessors
+    // ✅ PRECIO EN QUETZALES (SIN DECIMALES)
     public function getPriceFormattedAttribute()
     {
-        return '$' . number_format($this->price, 0, ',', '.');
+        return 'Q' . number_format($this->price, 0, '.', ',');
+    }
+
+    // ✅ PRECIO EN QUETZALES (CON DECIMALES)
+    public function getPriceFullAttribute()
+    {
+        return 'Q' . number_format($this->price, 2, '.', ',');
+    }
+
+    // ✅ PRECIO SOLO NÚMERO (para filtros)
+    public function getPriceNumberAttribute()
+    {
+        return number_format($this->price, 0, '.', ',');
     }
 
     public function getStatusBadgeAttribute()
@@ -65,38 +67,18 @@ class Vehicle extends Model
         return $badges[$this->status] ?? 'secondary';
     }
 
-
-    public function getFirstImageAttribute()
+    public function favorites()
     {
-        if ($this->images && count($this->images) > 0) {
-            return Storage::url('vehicles/' . $this->images[0]);
-        }
-        return asset('images/no-image.jpg');
+        return $this->hasMany(Favorite::class);
     }
 
-    public function getAllImagesAttribute()
+    public function getFavoritesCountAttribute()
     {
-        if ($this->images) {
-            return collect($this->images)->map(function($image) {
-                return Storage::url('vehicles/' . $image);
-            });
-        }
-        return collect([]);
+        return $this->favorites()->count();
     }
 
-        public static function boot()
+    public function isFavoritedBy($userId)
     {
-        parent::boot();
-        
-        static::creating(function ($vehicle) {
-            $vehicle->slug = Str::slug($vehicle->title . '-' . uniqid());
-        });
+        return $this->favorites()->where('user_id', $userId)->exists();
     }
-
- 
-        public function incrementViews()
-    {
-            $this->increment('views');
-    }
-
 }

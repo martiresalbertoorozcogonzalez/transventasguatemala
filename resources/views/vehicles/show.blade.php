@@ -98,29 +98,32 @@
 
                 <!-- Redes Sociales - Compartir -->
                 
-                <div class="card shadow-sm mt-3">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center gap-3 flex-wrap">
-                            <span class="fw-bold"><i class="fas fa-share-alt"></i> Compartir:</span>
-                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" 
-                            target="_blank" class="btn btn-outline-primary btn-sm">
-                                <i class="fab fa-facebook-f"></i> Facebook
-                            </a>
-                            <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($vehicle->title) }}" 
-                            target="_blank" class="btn btn-outline-info btn-sm">
-                                <i class="fab fa-twitter"></i> Twitter
-                            </a>
-                            <a href="https://wa.me/?text={{ urlencode($vehicle->title . ' - ' . url()->current()) }}" 
-                            target="_blank" class="btn btn-outline-success btn-sm">
-                                <i class="fab fa-whatsapp"></i> WhatsApp
-                            </a>
-                            <a href="https://t.me/share/url?url={{ urlencode(url()->current()) }}&text={{ urlencode($vehicle->title) }}" 
-                            target="_blank" class="btn btn-outline-primary btn-sm">
-                                <i class="fab fa-telegram"></i> Telegram
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <div class="card shadow-sm border-0 mt-3">
+    <div class="card-body">
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+            <span class="fw-bold">
+                <i class="fas fa-share-alt"></i> Síguenos en:
+            </span>
+            <a href="https://www.facebook.com/TransVentasGuatemala" target="_blank" 
+               class="btn btn-outline-primary btn-sm rounded-pill px-3"
+               style="font-weight: 500; border-width: 2px;">
+                <i class="fab fa-facebook-f me-1"></i> Facebook
+            </a>
+            <a href="https://www.instagram.com/TransVentasGuatemala" target="_blank" 
+               class="btn btn-outline-danger btn-sm rounded-pill px-3"
+               style="font-weight: 500; border-width: 2px;">
+                <i class="fab fa-instagram me-1"></i> Instagram
+            </a>
+            <a href="https://www.tiktok.com/@TransVentasGuatemala" target="_blank" 
+               class="btn btn-outline-dark btn-sm rounded-pill px-3"
+               style="font-weight: 500; border-width: 2px;">
+                <i class="fab fa-tiktok me-1"></i> TikTok
+            </a>
+        </div>
+    </div>
+</div>
+
+
             </div>
 
             <!-- ============================================ -->

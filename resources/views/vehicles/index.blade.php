@@ -44,8 +44,7 @@
         <!-- NOMBRE -->
         <h1 class="display-2 fw-bold text-white mb-2" 
             style="text-shadow: 0 0 60px rgba(13,110,253,0.2); letter-spacing: 2px; line-height: 1.2;">
-            Trans<span style="color: #64b5f6;">Ventas</span>
-            <span style="color: #64b5f6;">Guatemala</span>
+            Transventas<span style="color: #64b5f6;">Guatemala</span>
         </h1>
 
         <p class="lead text-white-50 mb-3" style="font-size: 1rem; max-width: 600px; margin: 0 auto; line-height: 1.6;">
@@ -74,10 +73,30 @@
                     </button>
                 </div>
             </form>
-            <p class="text-white-50 small mt-2 text-center" style="opacity: 0.6; font-size: 0.75rem;">
+            <p class="text-white small mt-2 text-center" style="opacity: 0.6; font-size: 0.75rem;">
                 <i class="fas fa-lightbulb me-1"></i> Ej: "Mercedes" · "Freightliner" · "2023"
             </p>
         </div>
+
+        <!-- BOTONES DE REDES SOCIALES -->
+<div class="d-flex flex-wrap gap-3 justify-content-center mt-3">
+    <a href="https://www.facebook.com/TransVentasGuatemala" target="_blank" 
+       class="btn btn-outline-light btn-sm px-4 rounded-pill"
+       style="font-weight: 500; border-width: 1.5px;">
+        <i class="fab fa-facebook me-1"></i> Facebook
+    </a>
+    <a href="https://www.instagram.com/TransVentasGuatemala" target="_blank" 
+       class="btn btn-outline-light btn-sm px-4 rounded-pill"
+       style="font-weight: 500; border-width: 1.5px;">
+        <i class="fab fa-instagram me-1"></i> Instagram
+    </a>
+    <a href="https://www.tiktok.com/@TransVentasGuatemala" target="_blank" 
+       class="btn btn-outline-light btn-sm px-4 rounded-pill"
+       style="font-weight: 500; border-width: 1.5px;">
+        <i class="fab fa-tiktok me-1"></i> TikTok
+    </a>
+</div>
+
     </div>
 </div>
 

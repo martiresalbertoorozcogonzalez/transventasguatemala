@@ -163,17 +163,17 @@
                 <!-- ============================================ -->
                 <div class="col-12 mt-3">
                     <h5 class="border-bottom pb-2 mb-3">
-                        <i class="fas fa-dollar-sign text-success"></i> Precio y Condiciones
+                        <i class="fas text-success"></i>(GTQ) Precio y Condiciones
                     </h5>
                 </div>
 
                 <!-- Precio -->
                 <div class="col-md-6 mb-3">
                     <label for="price" class="form-label fw-bold">
-                        Precio (USD) <span class="text-danger">*</span>
+                        Precio (GTQ) <span class="text-danger">*</span>
                     </label>
                     <div class="input-group">
-                        <span class="input-group-text">$</span>
+                        <span class="input-group-text">Q</span>
                         <input type="number" 
                                name="price" 
                                id="price"
@@ -186,7 +186,7 @@
                     @error('price')
                         <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
-                    <small class="text-muted">Precio en dólares americanos (USD)</small>
+                    <small class="text-muted">Precio en Quetzales moneda Guatemalteca (GTQ)</small>
                 </div>
 
                 <!-- Kilometraje -->

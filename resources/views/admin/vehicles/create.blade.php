@@ -168,10 +168,10 @@
                 <!-- Precio y Kilometraje -->
                 <div class="col-md-6 mb-3">
                     <label for="price" class="form-label fw-bold">
-                        Precio (USD) <span class="text-danger">*</span>
+                        Precio (GTQ) <span class="text-danger">*</span>
                     </label>
                     <div class="input-group">
-                        <span class="input-group-text">$</span>
+                        <span class="input-group-text">Q</span>
                         <input type="number" 
                                name="price" 
                                id="price"
