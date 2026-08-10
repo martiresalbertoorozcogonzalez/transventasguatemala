@@ -1,123 +1,215 @@
 @extends('layouts.app')
 
-@section('title', 'Camiones, Furgones y Plataformas en Venta')
+@section('title', 'TransVentas Guatemala - Camiones, Furgones y Plataformas')
 
-@section('meta_description', 'Encuentra los mejores camiones, furgones y plataformas en venta. Precios competitivos y amplia variedad de vehículos comerciales.')
+@section('meta_description', 'Encuentra los mejores camiones, furgones y plataformas en venta en Guatemala. Precios competitivos y amplia variedad de vehículos comerciales.')
 
 @section('content')
-    <div class="container py-4">
+
+@php
+    // Detectar filtros activos
+    $hasFilters = request()->has('type') || 
+                  request()->has('brand') || 
+                  request()->has('min_price') || 
+                  request()->has('max_price') || 
+                  request()->has('year_from') || 
+                  request()->has('year_to');
+                  
+    $hasSearch = request()->has('q') && request()->q != '';
+    $hasResults = $hasFilters || $hasSearch;
+@endphp
+
+<!-- ============================================ -->
+<!-- HERO SECTION -->
+<!-- ============================================ -->
+<div class="hero-section position-relative overflow-hidden" 
+     style="background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 40%, #0d1b2a 100%); min-height: 70vh; display: flex; align-items: center; justify-content: center; padding: 40px 0;">
+
+    <!-- EFECTOS DE FONDO -->
+    <div class="position-absolute top-50 start-50 translate-middle" 
+         style="width: 400px; height: 400px; background: radial-gradient(circle, rgba(13,110,253,0.08), transparent 70%); border-radius: 50%;">
+    </div>
+
+    <div class="container position-relative text-center" style="z-index: 2; max-width: 850px; margin: 0 auto;">
         
-
-        <div class="bg-primary text-white rounded-4 p-4 p-md-5 mb-5 text-center" 
-        style="background: linear-gradient(135deg, #1a237e 0%, #0d47a1 50%, #006064 100%);">
-
-            <h1 class="display-5 fw-bold">
-                <i class="fas fa-truck"></i> Encuentra tu Vehículo Ideal
-            </h1>
-            <p class="lead fs-6">Los mejores camiones, furgones y plataformas al mejor precio</p>
-            <p class="mb-3 small">Más de <strong>{{ $vehicles->total() }}</strong> vehículos disponibles</p>
-            
-            <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
-                <!-- ✅ FORMULARIO DE BÚSQUEDA -->
-                <form id="searchForm" action="/buscar" method="GET" class="w-100" style="max-width: 500px;">
-                    <div class="input-group" style="border-radius: 50px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                        <span class="input-group-text bg-white border-0 ps-3" style="border-radius: 50px 0 0 50px;">
-                            <i class="fas fa-search text-primary" style="font-size: 0.9rem;"></i>
-                        </span>
-                        <input type="text" 
-                            name="q"
-                            id="searchInput" 
-                            class="form-control border-0 py-2" 
-                            placeholder="🔍 ¿Qué vehículo buscas? (marca, modelo, tipo...)"
-                            autocomplete="off"
-                            style="font-size: 0.9rem;">
-                        <button type="submit" class="btn btn-light border-0 px-4" 
-                                style="border-radius: 0 50px 50px 0; background: white; font-weight: 500; color: #0d6efd;">
-                            <i class="fas fa-search me-1"></i> Buscar
-                        </button>
-                    </div>
-                </form>
-                
-                <!-- Botones -->
-                <div class="d-flex gap-2 flex-wrap justify-content-center">
-                    <a href="#vehicles" class="btn btn-light btn-sm px-3 py-1.5" style="font-size: 0.85rem;">
-                        <i class="fas fa-list"></i> Ver Todos
-                    </a>
-                    @auth
-                        @if(auth()->user()->is_admin)
-                            <a href="{{ route('admin.dashboard') }}" class="btn btn-warning btn-sm px-3 py-1.5" style="font-size: 0.85rem;">
-                                <i class="fas fa-cog"></i> Admin
-                            </a>
-                        @endif
-                    @else
-                        <a href="{{ route('register') }}" class="btn btn-outline-light btn-sm px-3 py-1.5" style="font-size: 0.85rem;">
-                            <i class="fas fa-user-plus"></i> Registrarse
-                        </a>
-                    @endauth
-                </div>
+        <!-- LOGO -->
+        <div class="d-flex justify-content-center mb-3">
+            <div style="display: inline-block; background: #ffffff; border-radius: 50%; padding: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); width: 160px; height: 160px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                <img src="{{ asset('images/LogoTransventasGuatemala.png') }}" 
+                     alt="TransVentas Guatemala" 
+                     style="width: 110%; height: 110%; object-fit: cover; display: block; margin: -5%;">
             </div>
         </div>
 
+        <!-- NOMBRE -->
+        <h1 class="display-2 fw-bold text-white mb-2" 
+            style="text-shadow: 0 0 60px rgba(13,110,253,0.2); letter-spacing: 2px; line-height: 1.2;">
+            Trans<span style="color: #64b5f6;">Ventas</span>
+            <span style="color: #64b5f6;">Guatemala</span>
+        </h1>
+
+        <p class="lead text-white-50 mb-3" style="font-size: 1rem; max-width: 600px; margin: 0 auto; line-height: 1.6;">
+            La pagina líder para comprar 
+            <span class="text-white fw-semibold">camiones</span>, 
+            <span class="text-white fw-semibold">furgones</span> y 
+            <span class="text-white fw-semibold">plataformas</span>.
+        </p>
+
+        <!-- BÚSQUEDA -->
+        <div style="max-width: 550px; margin: 0 auto;">
+            <form action="/buscar" method="GET" class="position-relative">
+                <div class="input-group shadow-lg" 
+                     style="border-radius: 60px; overflow: hidden; background: rgba(255,255,255,0.95); border: 1px solid rgba(255,255,255,0.2);">
+                    <span class="input-group-text bg-transparent border-0 ps-4" style="color: #6c757d;">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    <input type="text" 
+                           name="q"
+                           class="form-control bg-transparent border-0 py-2" 
+                           placeholder="🔍 Busca por marca, modelo o año..."
+                           style="font-size: 0.95rem; color: #2d3436;">
+                    <button type="submit" class="btn btn-primary px-4" 
+                            style="border-radius: 0 60px 60px 0; font-weight: 500; font-size: 0.95rem; background: linear-gradient(135deg, #0d6efd, #0dcaf0); border: none;">
+                        <i class="fas fa-search me-1"></i> Buscar
+                    </button>
+                </div>
+            </form>
+            <p class="text-white-50 small mt-2 text-center" style="opacity: 0.6; font-size: 0.75rem;">
+                <i class="fas fa-lightbulb me-1"></i> Ej: "Mercedes" · "Freightliner" · "2023"
+            </p>
+        </div>
     </div>
+</div>
 
-
-
-
-    <!-- ============================================ -->
-<!-- RESULTADOS DE BÚSQUEDA -->
 <!-- ============================================ -->
-    @if(request()->has('q') && request()->q != '')
-    <section class="mb-5" id="searchResults">
+<!-- INDICADOR DE FILTROS ACTIVOS -->
+<!-- ============================================ -->
+@if($hasFilters && !$hasSearch)
+<section style="padding: 15px 0; background: #f8f9fa; border-bottom: 2px solid #e9ecef;">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div>
+                <h5 class="mb-0">
+                    <i class="fas fa-filter text-primary"></i> 
+                    Filtros aplicados
+                </h5>
+                <p class="text-muted small mb-0">{{ $vehicles->total() }} vehículo(s) encontrado(s)</p>
+            </div>
+            <a href="{{ route('vehicles.index') }}" class="btn btn-outline-secondary btn-sm">
+                <i class="fas fa-times"></i> Limpiar filtros
+            </a>
+        </div>
+        <div class="mt-2 d-flex flex-wrap gap-2">
+            @if(request('type'))
+                <span class="badge bg-primary">Tipo: {{ ucfirst(request('type')) }}</span>
+            @endif
+            @if(request('brand'))
+                <span class="badge bg-primary">Marca: {{ request('brand') }}</span>
+            @endif
+            @if(request('min_price'))
+                <span class="badge bg-primary">${{ number_format(request('min_price')) }}</span>
+            @endif
+            @if(request('max_price'))
+                <span class="badge bg-primary">${{ number_format(request('max_price')) }}</span>
+            @endif
+            @if(request('year_from'))
+                <span class="badge bg-primary">Desde: {{ request('year_from') }}</span>
+            @endif
+            @if(request('year_to'))
+                <span class="badge bg-primary">Hasta: {{ request('year_to') }}</span>
+            @endif
+        </div>
+    </div>
+</section>
+@endif
+
+<!-- ============================================ -->
+<!-- RESULTADOS DE FILTROS -->
+<!-- ============================================ -->
+@if($hasFilters && !$hasSearch)
+<section id="resultados-filtros" style="padding: 20px 0 40px 0; background: #f8f9fa; min-height: 50vh;">
+    <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h2 class="mb-0">
-                    <i class="fas fa-search text-primary"></i> 
-                    Resultados para: <strong>"{{ request()->q }}"</strong>
-                </h2>
+                <h4 class="mb-0">
+                    <i class="fas fa-filter text-primary"></i> 
+                    Resultados con filtros aplicados
+                </h4>
                 <p class="text-muted small mt-1">{{ $vehicles->total() }} vehículo(s) encontrado(s)</p>
             </div>
             <a href="{{ route('vehicles.index') }}" class="btn btn-outline-secondary">
-                <i class="fas fa-times"></i> Limpiar búsqueda
+                <i class="fas fa-times"></i> Limpiar filtros
             </a>
+        </div>
+        
+        <div class="mt-2 d-flex flex-wrap gap-2 mb-3">
+            @if(request('type'))
+                <span class="badge bg-primary">Tipo: {{ ucfirst(request('type')) }}</span>
+            @endif
+            @if(request('brand'))
+                <span class="badge bg-primary">Marca: {{ request('brand') }}</span>
+            @endif
+            @if(request('min_price'))
+                <span class="badge bg-primary">Precio mínimo: ${{ number_format(request('min_price')) }}</span>
+            @endif
+            @if(request('max_price'))
+                <span class="badge bg-primary">Precio máximo: ${{ number_format(request('max_price')) }}</span>
+            @endif
+            @if(request('year_from'))
+                <span class="badge bg-primary">Desde: {{ request('year_from') }}</span>
+            @endif
+            @if(request('year_to'))
+                <span class="badge bg-primary">Hasta: {{ request('year_to') }}</span>
+            @endif
         </div>
         
         @if($vehicles->count() > 0)
             <div class="row">
                 @foreach($vehicles as $vehicle)
                 <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="position-relative">
-                            <div class="img-container">
-                                @if($vehicle->images && count($vehicle->images) > 0)
-                                    <img src="{{ asset('storage/vehicles/' . $vehicle->images[0]) }}" 
-                                        class="img-full" alt="{{ $vehicle->title }}">
-                                @else
-                                    <div class="bg-light d-flex align-items-center justify-content-center" 
-                                        style="height: 200px; width: 100%;">
-                                        <i class="fas fa-truck fa-3x text-muted"></i>
-                                    </div>
-                                @endif
-                            </div>
-                            <span class="position-absolute bottom-0 start-0 badge bg-{{ $vehicle->status_badge }} m-2 p-2">
+                    <div class="card h-100 border-0 shadow-sm hover-card" 
+                         style="border-radius: 20px; overflow: hidden; transition: all 0.4s; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                        
+                        <div class="position-relative overflow-hidden">
+                            <a href="/vehiculos/{{ $vehicle->slug }}">
+                                <div class="img-container">
+                                    @if($vehicle->images && count($vehicle->images) > 0)
+                                        <img src="{{ asset('storage/vehicles/' . $vehicle->images[0]) }}" 
+                                             class="img-full" alt="{{ $vehicle->title }}"
+                                             style="transition: transform 0.5s;">
+                                    @else
+                                        <div class="bg-light d-flex align-items-center justify-content-center" 
+                                             style="height: 200px; width: 100%;">
+                                            <i class="fas fa-truck fa-3x text-muted"></i>
+                                        </div>
+                                    @endif
+                                </div>
+                            </a>
+                            <span class="position-absolute bottom-0 start-0 badge bg-{{ $vehicle->status_badge }} m-2 p-2 rounded-pill px-3 py-2">
                                 {{ ucfirst($vehicle->status) }}
                             </span>
                             @if($vehicle->featured)
-                                <span class="position-absolute top-0 end-0 badge bg-warning m-2">
-                                    <i class="fas fa-star"></i> Destacado
+                                <span class="position-absolute top-0 end-0 badge bg-warning m-2 rounded-pill px-3 py-2">
+                                    <i class="fas fa-star me-1"></i> Destacado
                                 </span>
                             @endif
                         </div>
+                        
                         <div class="card-body">
-                            <h5 class="card-title">{{ Str::limit($vehicle->title, 40) }}</h5>
-                            <p class="text-muted small">
-                                <i class="fas fa-building"></i> {{ $vehicle->brand }}
-                                <i class="fas fa-calendar ms-2"></i> {{ $vehicle->year }}
+                            <a href="/vehiculos/{{ $vehicle->slug }}" class="text-decoration-none text-dark">
+                                <h5 class="card-title fw-bold mb-2">{{ Str::limit($vehicle->title, 40) }}</h5>
+                            </a>
+                            <p class="text-muted small mb-2">
+                                <i class="fas fa-building me-1"></i> {{ $vehicle->brand }}
+                                <i class="fas fa-calendar ms-2 me-1"></i> {{ $vehicle->year }}
                             </p>
-                            <p class="text-primary fw-bold fs-4">{{ $vehicle->price_formatted }}</p>
+                            <p class="text-primary fw-bold fs-4 mb-3">{{ $vehicle->price_formatted }}</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <span class="badge bg-info">{{ ucfirst($vehicle->type) }}</span>
-                                <a href="/vehiculos/{{ $vehicle->slug }}" class="btn btn-primary btn-sm">
-                                    <i class="fas fa-eye"></i> Ver Detalles
+                                <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-2">
+                                    {{ ucfirst($vehicle->type) }}
+                                </span>
+                                <a href="/vehiculos/{{ $vehicle->slug }}" class="btn btn-outline-primary btn-sm rounded-pill px-4">
+                                    Ver Detalles <i class="fas fa-arrow-right ms-1"></i>
                                 </a>
                             </div>
                         </div>
@@ -131,24 +223,24 @@
             </div>
         @else
             <div class="text-center py-5">
-                <i class="fas fa-search fa-4x text-muted mb-3"></i>
-                <h4>No se encontraron vehículos</h4>
-                <p class="text-muted">No hay resultados para "<strong>{{ request()->q }}</strong>"</p>
+                <i class="fas fa-filter fa-4x text-muted mb-3"></i>
+                <h4>No se encontraron vehículos con estos filtros</h4>
+                <p class="text-muted">Prueba con otros filtros</p>
                 <a href="{{ route('vehicles.index') }}" class="btn btn-primary">
                     <i class="fas fa-undo"></i> Ver todos los vehículos
                 </a>
             </div>
         @endif
-    </section>
-    @endif
+    </div>
+</section>
+@endif
 
-   
-    <!-- ============================================ -->
-    <!-- VEHÍCULOS RECIÉN INGRESADOS (NUEVA SECCIÓN) -->
-    <!-- ============================================ -->
-   
-    @if($recentVehicles->count() > 0)
-    <section class="mb-5" id="recent">
+<!-- ============================================ -->
+<!-- VEHÍCULOS RECIÉN INGRESADOS -->
+<!-- ============================================ -->
+@if(!$hasResults)
+<section class="mb-5" id="recientes" style="padding-top: 20px;">
+    <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="mb-0">
                 <i class="fas fa-clock text-success"></i> Recién Ingresados
@@ -159,38 +251,49 @@
         <div class="row">
             @foreach($recentVehicles as $vehicle)
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card h-100 shadow-sm border-success">
-                    <div class="position-relative">
-                        <div class="img-container">
-                            @if($vehicle->images && count($vehicle->images) > 0)
-                                <img src="{{ asset('storage/vehicles/' . $vehicle->images[0]) }}" 
-                                     class="img-full" alt="{{ $vehicle->title }}">
-                            @else
-                                <div class="bg-light d-flex align-items-center justify-content-center" 
-                                     style="height: 200px; width: 100%;">
-                                    <i class="fas fa-truck fa-3x text-muted"></i>
-                                </div>
-                            @endif
-                        </div>
-                        <span class="position-absolute top-0 end-0 badge bg-success m-2 p-2">
-                            <i class="fas fa-clock"></i> Nuevo
+                <div class="card h-100 border-0 shadow-sm hover-card" 
+                     style="border-radius: 20px; overflow: hidden; transition: all 0.4s; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                    
+                    <div class="position-relative overflow-hidden">
+                        <a href="/vehiculos/{{ $vehicle->slug }}">
+                            <div class="img-container">
+                                @if($vehicle->images && count($vehicle->images) > 0)
+                                    <img src="{{ asset('storage/vehicles/' . $vehicle->images[0]) }}" 
+                                         class="img-full" alt="{{ $vehicle->title }}"
+                                         style="transition: transform 0.5s;">
+                                @else
+                                    <div class="bg-light d-flex align-items-center justify-content-center" 
+                                         style="height: 200px; width: 100%;">
+                                        <i class="fas fa-truck fa-3x text-muted"></i>
+                                    </div>
+                                @endif
+                            </div>
+                        </a>
+                        <span class="position-absolute top-0 end-0 badge bg-success m-2 p-2 rounded-pill px-3 py-2" 
+                              style="box-shadow: 0 4px 15px rgba(25, 135, 84, 0.4);">
+                            <i class="fas fa-clock me-1"></i> Nuevo
                         </span>
-                        <span class="position-absolute bottom-0 start-0 badge bg-{{ $vehicle->status_badge }} m-2 p-2">
+                        <span class="position-absolute bottom-0 start-0 badge bg-{{ $vehicle->status_badge }} m-2 p-2 rounded-pill px-3 py-2">
                             {{ ucfirst($vehicle->status) }}
                         </span>
                     </div>
+                    
                     <div class="card-body">
-                        <h5 class="card-title">{{ Str::limit($vehicle->title, 40) }}</h5>
-                        <p class="text-muted small">
-                            <i class="fas fa-building"></i> {{ $vehicle->brand }}
-                            <i class="fas fa-calendar ms-2"></i> {{ $vehicle->year }}
-                            <i class="fas fa-clock ms-2 text-success"></i> {{ $vehicle->created_at->diffForHumans() }}
+                        <a href="/vehiculos/{{ $vehicle->slug }}" class="text-decoration-none text-dark">
+                            <h5 class="card-title fw-bold mb-2">{{ Str::limit($vehicle->title, 40) }}</h5>
+                        </a>
+                        <p class="text-muted small mb-2">
+                            <i class="fas fa-building me-1"></i> {{ $vehicle->brand }}
+                            <i class="fas fa-calendar ms-2 me-1"></i> {{ $vehicle->year }}
+                            <i class="fas fa-clock ms-2 text-success me-1"></i> {{ $vehicle->created_at->diffForHumans() }}
                         </p>
-                        <p class="text-primary fw-bold fs-4">{{ $vehicle->price_formatted }}</p>
+                        <p class="text-primary fw-bold fs-4 mb-3">{{ $vehicle->price_formatted }}</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge bg-info">{{ ucfirst($vehicle->type) }}</span>
-                            <a href="/vehiculos/{{ $vehicle->slug }}" class="btn btn-primary btn-sm">
-                                <i class="fas fa-eye"></i> Ver Detalles
+                            <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-2">
+                                {{ ucfirst($vehicle->type) }}
+                            </span>
+                            <a href="/vehiculos/{{ $vehicle->slug }}" class="btn btn-outline-primary btn-sm rounded-pill px-4">
+                                Ver Detalles <i class="fas fa-arrow-right ms-1"></i>
                             </a>
                         </div>
                     </div>
@@ -198,26 +301,27 @@
             </div>
             @endforeach
         </div>
-    </section>
-    @endif
+    </div>
+</section>
+@endif
 
-    <!-- ============================================ -->
-    <!-- TODOS LOS VEHÍCULOS -->
-    <!-- ============================================ -->
-   
-    <section id="vehicles">
+<!-- ============================================ -->
+<!-- TODOS LOS VEHÍCULOS -->
+<!-- ============================================ -->
+<section id="todos-los-vehiculos" style="padding: 20px 0 40px 0; {{ $hasResults ? 'min-height: 50vh;' : '' }}">
+    <div class="container">
+        @if(!$hasResults)
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="mb-0">
                 <i class="fas fa-truck"></i> Todos los Vehículos
             </h2>
             <span class="text-muted">{{ $vehicles->total() }} vehículos disponibles</span>
         </div>
+        @endif
 
         <div class="row">
-   
-        <!-- Filtros Sidebar -->
-   
-        <div class="col-lg-3 mb-4">
+            <!-- FILTROS SIDEBAR -->
+            <div class="col-lg-3 mb-4">
                 <div class="card shadow-sm sticky-top" style="top: 20px;">
                     <div class="card-body">
                         <h5 class="card-title">
@@ -225,8 +329,7 @@
                         </h5>
                         <hr>
                         
-                        <form action="/filtrar" method="GET" id="filterForm">
-                            <!-- Tipo -->
+                        <form action="/filtrar#resultados-filtros" method="GET" id="filterForm">
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Tipo</label>
                                 <select name="type" class="form-select">
@@ -239,7 +342,6 @@
                                 </select>
                             </div>
                             
-                            <!-- Marca -->
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Marca</label>
                                 <select name="brand" class="form-select">
@@ -252,7 +354,6 @@
                                 </select>
                             </div>
                             
-                            <!-- Precio -->
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Rango de Precio</label>
                                 <div class="row g-2">
@@ -275,7 +376,6 @@
                                 </div>
                             </div>
                             
-                            <!-- Año -->
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Año</label>
                                 <div class="row g-2">
@@ -300,7 +400,7 @@
                                 <i class="fas fa-search"></i> Aplicar Filtros
                             </button>
                             
-                            <a href="/vehiculos" class="btn btn-outline-secondary w-100">
+                            <a href="/vehiculos#todos-los-vehiculos" class="btn btn-outline-secondary w-100">
                                 <i class="fas fa-undo"></i> Limpiar Filtros
                             </a>
                         </form>
@@ -308,8 +408,7 @@
                 </div>
             </div>
             
-            <!-- Lista de vehículos -->
-   
+            <!-- LISTA DE VEHÍCULOS -->
             <div class="col-lg-9">
                 <div id="vehicleGrid">
                     @include('components.vehicle-grid', ['vehicles' => $vehicles])
@@ -320,459 +419,95 @@
                 </div>
             </div>
         </div>
-
-    </section>
-</div>
-
-
-
-    <!-- ============================================ -->
-    <!-- MODAL DE RESULTADOS DE BÚSQUEDA -->
-    <!-- ============================================ -->
-
-<div class="modal fade" id="searchResultModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title">
-                    <i class="fas fa-search"></i> Resultado de búsqueda
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body" id="searchResultContent">
-                <div class="text-center py-4">
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Cargando...</span>
-                    </div>
-                    <p class="mt-2">Buscando vehículo...</p>
-                </div>
-            </div>
-        </div>
     </div>
-</div>
+</section>
 
 @push('scripts')
 <script>
-// Filtros en tiempo real
-document.getElementById('filterForm').addEventListener('submit', function(e) {
+// ============================================
+// FILTROS AJAX CON SCROLL
+// ============================================
+
+document.getElementById('filterForm')?.addEventListener('submit', function(e) {
     e.preventDefault();
     
     const formData = new FormData(this);
     const params = new URLSearchParams(formData);
     
-    // Mostrar loading
     document.getElementById('vehicleGrid').innerHTML = `
         <div class="text-center py-5">
             <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">Cargando...</span>
             </div>
-            <p class="mt-2">Buscando vehículos...</p>
+            <p class="mt-2">Cargando vehículos...</p>
         </div>
     `;
     
     fetch(`/filtrar?${params.toString()}`, {
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest'
-        }
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
     })
     .then(response => response.text())
     .then(html => {
         document.getElementById('vehicleGrid').innerHTML = html;
         history.pushState(null, '', `?${params.toString()}`);
+        
+        setTimeout(function() {
+            const target = document.getElementById('resultados-filtros') || document.getElementById('todos-los-vehiculos');
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }, 200);
     })
     .catch(error => {
-        console.error('Error:', error);
         document.getElementById('vehicleGrid').innerHTML = `
             <div class="alert alert-danger">
                 <i class="fas fa-exclamation-circle"></i>
-                Error al cargar los filtros. Por favor, intenta de nuevo.
+                Error al cargar los filtros. Intenta de nuevo.
             </div>
         `;
     });
 });
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('searchInput');
-    const searchBtn = document.getElementById('searchBtn');
-    const suggestions = document.getElementById('searchSuggestions');
-    const modal = new bootstrap.Modal(document.getElementById('searchResultModal'));
-    const modalContent = document.getElementById('searchResultContent');
-    
-    let searchTimeout = null;
-    
-    // ============================================
-    // BÚSQUEDA EN TIEMPO REAL (SUGERENCIAS)
-    // ============================================
-    searchInput.addEventListener('input', function() {
-        const query = this.value.trim();
-        
-        clearTimeout(searchTimeout);
-        
-        if (query.length < 2) {
-            suggestions.style.display = 'none';
-            return;
-        }
-        
-        searchTimeout = setTimeout(function() {
-            fetch(`/buscar?q=${encodeURIComponent(query)}`, {
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
-            .then(response => response.text())
-            .then(html => {
-                // Extraer solo los vehículos del grid
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = html;
-                const grid = tempDiv.querySelector('#vehicleGrid');
-                
-                if (grid && grid.innerHTML.trim() !== '') {
-                    suggestions.innerHTML = grid.innerHTML;
-                    suggestions.style.display = 'block';
-                } else {
-                    suggestions.innerHTML = `
-                        <div class="p-3 text-center text-muted">
-                            <i class="fas fa-search fa-2x d-block mb-2"></i>
-                            No se encontraron vehículos para "<strong>${query}</strong>"
-                        </div>
-                    `;
-                    suggestions.style.display = 'block';
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                suggestions.innerHTML = `
-                    <div class="p-3 text-center text-danger">
-                        <i class="fas fa-exclamation-circle"></i>
-                        Error al buscar. Intenta de nuevo.
-                    </div>
-                `;
-                suggestions.style.display = 'block';
-            });
-        }, 300);
-    });
-    
-    // Ocultar sugerencias al hacer clic fuera
-    document.addEventListener('click', function(e) {
-        if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
-            suggestions.style.display = 'none';
-        }
-    });
-    
-    // ============================================
-    // VER DETALLE DEL VEHÍCULO EN MODAL
-    // ============================================
-    function showVehicleDetail(slug) {
-        modal.show();
-        modalContent.innerHTML = `
-            <div class="text-center py-4">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Cargando...</span>
-                </div>
-                <p class="mt-2">Cargando detalles del vehículo...</p>
-            </div>
-        `;
-        
-        fetch(`/vehiculos/${slug}`, {
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        })
-        .then(response => response.text())
-        .then(html => {
-            // Extraer solo el contenido principal
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = html;
-            const content = tempDiv.querySelector('.container.py-4');
-            
-            if (content) {
-                modalContent.innerHTML = content.innerHTML;
-            } else {
-                modalContent.innerHTML = `
-                    <div class="text-center py-4 text-danger">
-                        <i class="fas fa-exclamation-circle fa-3x d-block mb-3"></i>
-                        <h5>No se pudo cargar el vehículo</h5>
-                        <p>Intenta de nuevo más tarde</p>
-                    </div>
-                `;
-            }
-        })
-        .catch(error => {
-            modalContent.innerHTML = `
-                <div class="text-center py-4 text-danger">
-                    <i class="fas fa-exclamation-circle fa-3x d-block mb-3"></i>
-                    <h5>Error al cargar el vehículo</h5>
-                    <p>${error.message}</p>
-                </div>
-            `;
-        });
-    }
-    
-    // Delegar eventos en las sugerencias
-    
-    suggestions.addEventListener('click', function(e) {
-        const link = e.target.closest('a[href^="/vehiculos/"]');
-        if (link) {
-            e.preventDefault();
-            const slug = link.getAttribute('href').replace('/vehiculos/', '');
-            suggestions.style.display = 'none';
-            searchInput.value = '';
-            showVehicleDetail(slug);
-        }
-    });
-    
-    // ============================================
-    // BÚSQUEDA CON BOTÓN O ENTER
-    // ============================================
-
-    function performSearch() {
-        const query = searchInput.value.trim();
-        if (query.length < 2) {
-            alert('Escribe al menos 2 caracteres para buscar');
-            return;
-        }
-        
-        fetch(`/buscar?q=${encodeURIComponent(query)}`, {
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        })
-        .then(response => response.text())
-        .then(html => {
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = html;
-            const grid = tempDiv.querySelector('#vehicleGrid');
-            
-            if (grid && grid.innerHTML.trim() !== '') {
-                // Mostrar los resultados en el modal
-                modal.show();
-                modalContent.innerHTML = `
-                    <div class="mb-3">
-                        <h5>Resultados para: <strong>"${query}"</strong></h5>
-                        <p class="text-muted small">Haz clic en cualquier vehículo para ver más detalles</p>
-                    </div>
-                    ${grid.innerHTML}
-                `;
-                
-                // Agregar eventos a los enlaces de los resultados
-                modalContent.querySelectorAll('a[href^="/vehiculos/"]').forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const slug = this.getAttribute('href').replace('/vehiculos/', '');
-                        modal.hide();
-                        setTimeout(() => {
-                            showVehicleDetail(slug);
-                        }, 300);
-                    });
-                });
-            } else {
-                alert(`No se encontraron vehículos para "${query}"`);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al buscar. Intenta de nuevo.');
-        });
-    }
-    
-    searchBtn.addEventListener('click', performSearch);
-    searchInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            performSearch();
-        }
-    });
-});       
-
-document.addEventListener('DOMContentLoaded', function() {
-    const searchForm = document.getElementById('searchForm');
-    const searchInput = document.getElementById('searchInput');
-    const modal = new bootstrap.Modal(document.getElementById('searchResultModal'));
-    const modalContent = document.getElementById('searchResultContent');
-    let searchTimeout = null;
-    
-    // ============================================
-    // BÚSQUEDA CON MODAL
-    // ============================================
-
-    searchForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const query = searchInput.value.trim();
-        if (query.length < 2) {
-            alert('Escribe al menos 2 caracteres para buscar');
-            return;
-        }
-        
-        // Mostrar modal con loading
-        modal.show();
-        modalContent.innerHTML = `
-            <div class="text-center py-4">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Cargando...</span>
-                </div>
-                <p class="mt-2">Buscando vehículos para "<strong>${query}</strong>"...</p>
-            </div>
-        `;
-        
-        // Hacer la petición AJAX
-        fetch(`/buscar?q=${encodeURIComponent(query)}`, {
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        })
-        .then(response => response.text())
-        .then(html => {
-            // Extraer solo el grid de vehículos
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = html;
-            const grid = tempDiv.querySelector('#vehicleGrid');
-            
-            if (grid && grid.innerHTML.trim() !== '') {
-                // Mostrar resultados en el modal
-                modalContent.innerHTML = `
-                    <div class="mb-3">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h6>Resultados para: <strong>"${query}"</strong></h6>
-                            <span class="badge bg-primary">${grid.querySelectorAll('.col-md-6').length} vehículos</span>
-                        </div>
-                        <p class="text-muted small">Haz clic en cualquier vehículo para ver más detalles</p>
-                    </div>
-                    ${grid.innerHTML}
-                `;
-                
-                // Agregar eventos a los enlaces de los resultados
-                modalContent.querySelectorAll('a[href^="/vehiculos/"]').forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const href = this.getAttribute('href');
-                        modal.hide();
-                        setTimeout(() => {
-                            window.location.href = href;
-                        }, 300);
-                    });
-                });
-            } else {
-                modalContent.innerHTML = `
-                    <div class="text-center py-4">
-                        <i class="fas fa-search fa-3x text-muted d-block mb-3"></i>
-                        <h5>No se encontraron vehículos</h5>
-                        <p class="text-muted">No hay resultados para "<strong>${query}</strong>"</p>
-                        <button class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">
-                            Cerrar
-                        </button>
-                    </div>
-                `;
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            modalContent.innerHTML = `
-                <div class="text-center py-4 text-danger">
-                    <i class="fas fa-exclamation-circle fa-3x d-block mb-3"></i>
-                    <h5>Error al buscar</h5>
-                    <p class="text-muted">${error.message}</p>
-                    <button class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">
-                        Cerrar
-                    </button>
-                </div>
-            `;
-        });
-    });
-    
-    // ============================================
-    // SUGERENCIAS EN TIEMPO REAL
-    // ============================================
-
-    if (searchInput) {
-        // Crear contenedor para sugerencias
-        const suggestionsDiv = document.createElement('div');
-        suggestionsDiv.id = 'searchSuggestions';
-        suggestionsDiv.className = 'bg-white rounded-3 shadow-lg mt-1';
-        suggestionsDiv.style.cssText = 'display: none; max-height: 250px; overflow-y: auto; position: absolute; width: 100%; z-index: 1000; border-radius: 12px;';
-        searchInput.parentNode.appendChild(suggestionsDiv);
-        
-        searchInput.addEventListener('input', function() {
-            const query = this.value.trim();
-            
-            clearTimeout(searchTimeout);
-            
-            if (query.length < 2) {
-                suggestionsDiv.style.display = 'none';
-                return;
-            }
-            
-            searchTimeout = setTimeout(function() {
-                fetch(`/buscar?q=${encodeURIComponent(query)}`, {
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                })
-                .then(response => response.text())
-                .then(html => {
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = html;
-                    const grid = tempDiv.querySelector('#vehicleGrid');
-                    
-                    if (grid && grid.innerHTML.trim() !== '') {
-                        const items = grid.querySelectorAll('.col-md-6.col-xl-4');
-                        if (items.length > 0) {
-                            let htmlSuggestions = '<div class="p-2">';
-                            items.forEach(item => {
-                                htmlSuggestions += item.innerHTML;
-                            });
-                            htmlSuggestions += '</div>';
-                            suggestionsDiv.innerHTML = htmlSuggestions;
-                            suggestionsDiv.style.display = 'block';
-                        } else {
-                            suggestionsDiv.innerHTML = `
-                                <div class="p-3 text-center text-muted small">
-                                    <i class="fas fa-search d-block mb-1"></i>
-                                    No se encontraron vehículos para "<strong>${query}</strong>"
-                                </div>
-                            `;
-                            suggestionsDiv.style.display = 'block';
-                        }
-                    } else {
-                        suggestionsDiv.innerHTML = `
-                            <div class="p-3 text-center text-muted small">
-                                <i class="fas fa-search d-block mb-1"></i>
-                                No se encontraron vehículos para "<strong>${query}</strong>"
-                            </div>
-                        `;
-                        suggestionsDiv.style.display = 'block';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    suggestionsDiv.style.display = 'none';
-                });
-            }, 300);
-        });
-        
-        // Ocultar sugerencias al hacer clic fuera
-        document.addEventListener('click', function(e) {
-            if (!searchInput.contains(e.target) && !suggestionsDiv.contains(e.target)) {
-                suggestionsDiv.style.display = 'none';
-            }
-        });
-        
-        // Hacer clic en sugerencia = abrir modal con detalle
-        suggestionsDiv.addEventListener('click', function(e) {
-            const link = e.target.closest('a[href^="/vehiculos/"]');
-            if (link) {
-                e.preventDefault();
-                const href = link.getAttribute('href');
-                suggestionsDiv.style.display = 'none';
-                searchInput.value = '';
-                window.location.href = href;
-            }
-        });
-    }
-});
-
 </script>
 @endpush
+
+<style>
+    .hover-card {
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        cursor: pointer;
+    }
+    
+    .img-container {
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(135deg, #1a1a3e, #0d1b2a);
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+    }
+    
+    .hover-card:hover .img-container img {
+        transform: scale(1.05);
+    }
+    
+    .hero-section {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    @media (max-width: 768px) {
+        .hero-section {
+            min-height: 50vh !important;
+        }
+        .hero-section h1 {
+            font-size: 2rem !important;
+        }
+    }
+</style>
 
 @endsection

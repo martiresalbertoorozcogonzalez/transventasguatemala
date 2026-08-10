@@ -110,38 +110,38 @@ class VehicleController extends Controller
 }
 
     public function search(Request $request)
-    {
-    
-          $query = Vehicle::available();
-
-    if ($request->q) {
-        $searchTerm = $request->q;
-        $query->where(function($q) use ($searchTerm) {
-            $q->where('title', 'like', '%' . $searchTerm . '%')
-              ->orWhere('brand', 'like', '%' . $searchTerm . '%')
-              ->orWhere('model', 'like', '%' . $searchTerm . '%')
-              ->orWhere('type', 'like', '%' . $searchTerm . '%')
-              ->orWhere('description', 'like', '%' . $searchTerm . '%')
-              ->orWhere('year', 'like', '%' . $searchTerm . '%');
-        });
+{
+    // Solo buscar cuando hay q
+    if (!$request->q) {
+        return redirect()->route('vehicles.index');
     }
+
+    $query = Vehicle::available();
+
+    $searchTerm = $request->q;
+    $query->where(function($q) use ($searchTerm) {
+        $q->where('title', 'like', '%' . $searchTerm . '%')
+          ->orWhere('brand', 'like', '%' . $searchTerm . '%')
+          ->orWhere('model', 'like', '%' . $searchTerm . '%')
+          ->orWhere('type', 'like', '%' . $searchTerm . '%')
+          ->orWhere('description', 'like', '%' . $searchTerm . '%')
+          ->orWhere('year', 'like', '%' . $searchTerm . '%');
+    });
 
     $vehicles = $query->latest()->paginate(12);
     
-    // ✅ Para AJAX (sugerencias)
+    // Para AJAX (sugerencias)
     if ($request->ajax()) {
         return view('components.vehicle-grid', compact('vehicles'))->render();
     }
 
-    // ✅ Para búsqueda normal (página completa)
+    // Para búsqueda normal
     $recentVehicles = Vehicle::available()->latest()->limit(6)->get();
-    $featuredVehicles = Vehicle::available()->where('featured', true)->latest()->limit(6)->get();
     $types = Vehicle::select('type')->distinct()->pluck('type');
     $brands = Vehicle::select('brand')->distinct()->pluck('brand');
 
-    return view('vehicles.index', compact('vehicles', 'recentVehicles', 'featuredVehicles', 'types', 'brands'));
-
-    }
+    return view('vehicles.search', compact('vehicles', 'recentVehicles', 'types', 'brands'));
+}
 
     // Admin CRUD
     public function create()

@@ -5,8 +5,8 @@
     <div class="row">
         @foreach($vehicles as $vehicle)
         <div class="col-md-6 col-xl-4 mb-4">
-            <div class="card h-100 shadow-sm vehicle-card">
-                <div class="position-relative">
+            <div class="card h-100 shadow-sm vehicle-card hover-card">
+                <div class="position-relative  overflow-hidden">
 
                     {{-- ✅ IMAGEN CON ENLACE AL DETALLE --}}
                     
