@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\Admin\VehicleController as AdminVehicleController;
+use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\FilterController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ContactController;
@@ -77,3 +78,11 @@ Route::get('/dashboard', function () {
     }
     return redirect()->route('home');
 })->name('dashboard');
+
+
+// Rutas admin para mensajes
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('contacts', AdminContactController::class)->only(['index', 'show', 'destroy']);
+    Route::post('/contacts/{contact}/responded', [AdminContactController::class, 'markAsResponded'])->name('contacts.responded');
+});

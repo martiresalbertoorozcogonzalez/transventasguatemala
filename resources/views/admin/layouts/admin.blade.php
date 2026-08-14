@@ -99,6 +99,19 @@
                             <i class="fas fa-plus-circle"></i> Nuevo Vehículo
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('admin.contacts.*') ? 'active' : '' }}" 
+                        href="{{ route('admin.contacts.index') }}">
+                            <i class="fas fa-envelope"></i> 
+                            Mensajes
+                            @php
+                                $pendientes = \App\Models\Contact::where('status', 'pendiente')->count();
+                            @endphp
+                            @if($pendientes > 0)
+                                <span class="badge bg-danger float-end">{{ $pendientes }}</span>
+                            @endif
+                        </a>
+                    </li>
                     <li class="nav-item mt-4">
                         <hr class="border-light">
                     </li>
