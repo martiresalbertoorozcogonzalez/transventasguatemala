@@ -32,7 +32,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::7g1Lx502pFJXPo7o',
+            '_route' => 'generated::CSsz8MPEuNBEAUGk',
           ),
           1 => NULL,
           2 => 
@@ -126,6 +126,26 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
+      '/beneficios' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'pages.beneficios',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
       '/register' => 
       array (
         0 => 
@@ -149,7 +169,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::NY5cvoNtrla1ndec',
+            '_route' => 'generated::RKJpf0OiAy6Hy3gx',
           ),
           1 => NULL,
           2 => 
@@ -185,7 +205,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::0LwExtc6ggAyhdnZ',
+            '_route' => 'generated::rRizoTWWuA6CWTnJ',
           ),
           1 => NULL,
           2 => 
@@ -315,7 +335,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::UMo99sTZKqqEOuFi',
+            '_route' => 'generated::rSqrwF23pmX7Xy15',
           ),
           1 => NULL,
           2 => 
@@ -359,6 +379,26 @@ app('router')->setCompiledRoutes(
           2 => 
           array (
             'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/favorites' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'favorites.index',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
           ),
           3 => NULL,
           4 => false,
@@ -442,13 +482,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/favorites' => 
+      '/admin/contacts' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'favorites.index',
+            '_route' => 'admin.contacts.index',
           ),
           1 => NULL,
           2 => 
@@ -482,34 +522,14 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/admin/contacts' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.contacts.index',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
     ),
     2 => 
     array (
-      0 => '{^(?|/ve(?|hiculos/([^/]++)(*:29)|rify\\-email/([^/]++)/([^/]++)(*:65))|/contact\\.vehicle/([^/]++)(*:99)|/reset\\-password/([^/]++)(*:131)|/admin/(?|vehicles/([^/]++)(?|(*:169)|/(?|edit(*:185)|image(*:198)|delete\\-image(*:219)|status(*:233)|toggle\\-featured(*:257))|(*:266))|contacts/([^/]++)(?|(*:295)|/responded(*:313)))|/favorites/([^/]++)/toggle(*:349)|/storage/(.*)(?|(*:373)))/?$}sDu',
+      0 => '{^(?|/ve(?|hiculos/([^/]++)(?|(*:32)|/contactar(*:49))|rify\\-email/([^/]++)/([^/]++)(*:86))|/reset\\-password/([^/]++)(*:119)|/favorites/([^/]++)/toggle(*:153)|/admin/(?|vehicles/([^/]++)(?|(*:191)|/(?|edit(*:207)|image(*:220)|delete\\-image(*:241)|status(*:255)|toggle\\-featured(*:279))|(*:288))|contacts/([^/]++)(?|(*:317)|/responded(*:335)))|/storage/(.*)(?|(*:361)))/?$}sDu',
     ),
     3 => 
     array (
-      29 => 
+      32 => 
       array (
         0 => 
         array (
@@ -532,7 +552,29 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      65 => 
+      49 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'contact.vehicle',
+          ),
+          1 => 
+          array (
+            0 => 'vehicle',
+          ),
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      86 => 
       array (
         0 => 
         array (
@@ -556,29 +598,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      99 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'contact.vehicle',
-          ),
-          1 => 
-          array (
-            0 => 'vehicle',
-          ),
-          2 => 
-          array (
-            'POST' => 0,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      131 => 
+      119 => 
       array (
         0 => 
         array (
@@ -601,7 +621,29 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      169 => 
+      153 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'favorites.toggle',
+          ),
+          1 => 
+          array (
+            0 => 'vehicle',
+          ),
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      191 => 
       array (
         0 => 
         array (
@@ -624,7 +666,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      185 => 
+      207 => 
       array (
         0 => 
         array (
@@ -647,7 +689,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      198 => 
+      220 => 
       array (
         0 => 
         array (
@@ -669,7 +711,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      219 => 
+      241 => 
       array (
         0 => 
         array (
@@ -691,7 +733,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      233 => 
+      255 => 
       array (
         0 => 
         array (
@@ -713,7 +755,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      257 => 
+      279 => 
       array (
         0 => 
         array (
@@ -735,7 +777,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      266 => 
+      288 => 
       array (
         0 => 
         array (
@@ -777,7 +819,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      295 => 
+      317 => 
       array (
         0 => 
         array (
@@ -819,7 +861,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      313 => 
+      335 => 
       array (
         0 => 
         array (
@@ -841,29 +883,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      349 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'favorites.toggle',
-          ),
-          1 => 
-          array (
-            0 => 'vehicle',
-          ),
-          2 => 
-          array (
-            'POST' => 0,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      373 => 
+      361 => 
       array (
         0 => 
         array (
@@ -967,7 +987,7 @@ app('router')->setCompiledRoutes(
             }
 
             return response()->json([\'status\' => \'logged\']);
-        }";s:5:"scope";s:34:"Laravel\\Boost\\BoostServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000006940000000000000000";}}',
+        }";s:5:"scope";s:34:"Laravel\\Boost\\BoostServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000006950000000000000000";}}',
         'as' => 'boost.browser-logs',
         'excluded_middleware' => 
         array (
@@ -988,7 +1008,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::7g1Lx502pFJXPo7o' => 
+    'generated::CSsz8MPEuNBEAUGk' => 
     array (
       'methods' => 
       array (
@@ -1024,8 +1044,8 @@ app('router')->setCompiledRoutes(
                     return response(\\Illuminate\\Support\\Facades\\View::file(\'C:\\\\laragon\\\\www\\\\transventasguatemala\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Configuration\'.\'/../resources/health-up.blade.php\', [
                         \'exception\' => $exception,
                     ]), status: $status);
-                }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"00000000000006db0000000000000000";}}',
-        'as' => 'generated::7g1Lx502pFJXPo7o',
+                }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"00000000000006dc0000000000000000";}}',
+        'as' => 'generated::CSsz8MPEuNBEAUGk',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1226,13 +1246,50 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
+    'pages.beneficios' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'beneficios',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\PageController@beneficios',
+        'controller' => 'App\\Http\\Controllers\\PageController@beneficios',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'pages.beneficios',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
     'contact.vehicle' => 
     array (
       'methods' => 
       array (
         0 => 'POST',
       ),
-      'uri' => 'contact.vehicle/{vehicle}',
+      'uri' => 'vehiculos/{vehicle}/contactar',
       'action' => 
       array (
         'middleware' => 
@@ -1300,7 +1357,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::NY5cvoNtrla1ndec' => 
+    'generated::RKJpf0OiAy6Hy3gx' => 
     array (
       'methods' => 
       array (
@@ -1321,7 +1378,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::NY5cvoNtrla1ndec',
+        'as' => 'generated::RKJpf0OiAy6Hy3gx',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1375,7 +1432,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::0LwExtc6ggAyhdnZ' => 
+    'generated::rRizoTWWuA6CWTnJ' => 
     array (
       'methods' => 
       array (
@@ -1396,7 +1453,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::0LwExtc6ggAyhdnZ',
+        'as' => 'generated::rRizoTWWuA6CWTnJ',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1716,7 +1773,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::UMo99sTZKqqEOuFi' => 
+    'generated::rSqrwF23pmX7Xy15' => 
     array (
       'methods' => 
       array (
@@ -1737,7 +1794,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::UMo99sTZKqqEOuFi',
+        'as' => 'generated::rSqrwF23pmX7Xy15',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1827,6 +1884,81 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
+    'favorites.toggle' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'favorites/{vehicle}/toggle',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\FavoriteController@toggle',
+        'controller' => 'App\\Http\\Controllers\\FavoriteController@toggle',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'favorites.toggle',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'favorites.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'favorites',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\FavoriteController@index',
+        'controller' => 'App\\Http\\Controllers\\FavoriteController@index',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'favorites.index',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
     'admin.dashboard' => 
     array (
       'methods' => 
@@ -1845,7 +1977,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'O:55:"Laravel\\SerializableClosure\\UnsignedSerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:60:"function () {
         return \\view(\'admin.dashboard\');
-    }";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000006ee0000000000000000";}}',
+    }";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000006f20000000000000000";}}',
         'as' => 'admin.dashboard',
         'namespace' => NULL,
         'prefix' => '/admin',
@@ -2290,122 +2422,6 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'favorites.toggle' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'POST',
-      ),
-      'uri' => 'favorites/{vehicle}/toggle',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-          1 => 'auth',
-        ),
-        'uses' => 'App\\Http\\Controllers\\FavoriteController@toggle',
-        'controller' => 'App\\Http\\Controllers\\FavoriteController@toggle',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'favorites.toggle',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'favorites.index' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'favorites',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-          1 => 'auth',
-        ),
-        'uses' => 'App\\Http\\Controllers\\FavoriteController@index',
-        'controller' => 'App\\Http\\Controllers\\FavoriteController@index',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'favorites.index',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'dashboard' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'dashboard',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'O:55:"Laravel\\SerializableClosure\\UnsignedSerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:171:"function () {
-    if (\\auth()->check() && \\auth()->user()->is_admin) {
-        return \\redirect()->route(\'admin.dashboard\');
-    }
-    return \\redirect()->route(\'home\');
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000006dd0000000000000000";}}',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'dashboard',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
     'admin.contacts.index' => 
     array (
       'methods' => 
@@ -2560,6 +2576,48 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
+    'dashboard' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'dashboard',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'O:55:"Laravel\\SerializableClosure\\UnsignedSerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:176:"function () {
+    if (\\auth()->check() && \\auth()->user()->is_admin) {
+        return \\redirect()->route(\'admin.dashboard\');
+    }
+    return \\redirect()->route(\'home\');
+
+    }";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000006df0000000000000000";}}',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'dashboard',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
     'storage.local' => 
     array (
       'methods' => 
@@ -2576,7 +2634,7 @@ app('router')->setCompiledRoutes(
                         $config,
                         $isProduction
                     ))($request, $path);
-                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000006fd0000000000000000";}}',
+                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000006ff0000000000000000";}}',
         'as' => 'storage.local',
       ),
       'fallback' => false,
@@ -2609,7 +2667,7 @@ app('router')->setCompiledRoutes(
                         $config,
                         $isProduction
                     ))($request, $path);
-                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000007010000000000000000";}}',
+                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000007070000000000000000";}}',
         'as' => 'storage.local.upload',
       ),
       'fallback' => false,

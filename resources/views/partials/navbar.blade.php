@@ -1,5 +1,3 @@
-{{-- resources/views/partials/navbar.blade.php --}}
-{{-- VERSIÓN CON ESTILOS PROFESIONALES --}}
 
 <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0d1b2a 100%); padding: 12px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
     <div class="container">
@@ -12,9 +10,11 @@
             </div>
             <div>
                 <span style="font-weight: 700; font-size: 1.3rem; color: #ffffff; letter-spacing: 0.5px; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">
-                    TransVentasGuatemala
+                    TransventasGuatemala
                 </span>
-                
+                <span style="font-weight: 300; font-size: 0.7rem; color: #64b5f6; display: block; margin-top: -3px; letter-spacing: 2px; text-transform: uppercase;">
+                    <i class="fas fa-map-marker-alt" style="font-size: 0.6rem;"></i> Guatemala
+                </span>
             </div>
         </a>
 
@@ -41,7 +41,15 @@
                         <i class="fas fa-truck"></i> Vehículos
                     </a>
                 </li>
-                <!-- @auth
+                <!-- ✅ BENEFICIOS - USANDO URL DIRECTA -->
+                <li class="nav-item">
+                    <a class="nav-link" 
+                       href="/beneficios"
+                       style="color: rgba(255,255,255,0.8); font-weight: 500; padding: 8px 18px; border-radius: 8px; transition: all 0.3s;">
+                        <i class="fas fa-star"></i> Beneficios
+                    </a>
+                </li>
+                @auth
                     @if(auth()->user()->is_admin)
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.*') ? 'active' : '' }}" 
@@ -51,7 +59,7 @@
                             </a>
                         </li>
                     @endif
-                @endauth -->
+                @endauth
             </ul>
 
             <!-- Menú usuario -->
@@ -117,29 +125,18 @@
 </nav>
 
 <style>
-    /* ============================================ */
-    /* ESTILOS DEL NAVBAR */
-    /* ============================================ */
-    
-    /* Hover en enlaces */
     .navbar-nav .nav-link:hover {
         color: #ffffff !important;
         background: rgba(255,255,255,0.1);
     }
-    
-    /* Enlace activo */
     .navbar-nav .nav-link.active {
         color: #ffffff !important;
         background: rgba(13, 110, 253, 0.3);
     }
-    
-    /* Dropdown items hover */
     .dropdown-item:hover {
         background: rgba(255,255,255,0.1) !important;
         color: #ffffff !important;
     }
-    
-    /* Responsive */
     @media (max-width: 992px) {
         .navbar-nav .nav-link {
             padding: 10px 15px !important;

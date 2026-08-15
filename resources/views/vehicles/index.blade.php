@@ -435,6 +435,195 @@
     </div>
 </section>
 
+<!-- ============================================ -->
+<!-- SECCIÓN DE BENEFICIOS - PÁGINA PRINCIPAL -->
+<!-- ============================================ -->
+<section class="py-5 mt-5" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 20px;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">
+                <i class="fas fa-star text-warning"></i>
+                ¿Por qué registrarte?
+            </h2>
+            <p class="text-muted">Descubre todos los beneficios que tenemos para ti</p>
+        </div>
+
+        <div class="row g-4">
+            
+            <!-- Beneficio 1: Favoritos -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm hover-card text-center p-4" style="border-radius: 16px;">
+                    <div class="rounded-circle bg-danger bg-opacity-10 d-flex align-items-center justify-content-center mx-auto mb-3" 
+                         style="width: 70px; height: 70px;">
+                        <i class="fas fa-heart fa-2x text-danger"></i>
+                    </div>
+                    <h5 class="fw-bold">❤️ Favoritos</h5>
+                    <p class="text-muted small">Guarda tus vehículos favoritos y accede a ellos rápidamente desde tu perfil.</p>
+                </div>
+            </div>
+
+            <!-- Publicar Vehículos -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm hover-card text-center p-4" style="border-radius: 16px; border: 2px solid #0d6efd;">
+                    <div class="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center mx-auto mb-3" 
+                         style="width: 70px; height: 70px;">
+                        <i class="fas fa-upload fa-2x text-primary"></i>
+                    </div>
+                    <h5 class="fw-bold text-primary">🚀 Publica tus Vehículos</h5>
+                    <p class="text-muted small">¿Tienes vehículos que quieres vender? Publica tu anuncio y llega a miles de compradores.</p>
+                    <span class="badge bg-warning text-dark mt-2">
+                        <i class="fas fa-clock me-1"></i> Próximamente
+                    </span>
+                </div>
+            </div>
+
+            <!-- Beneficio 3: Alertas -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm hover-card text-center p-4" style="border-radius: 16px;">
+                    <div class="rounded-circle bg-warning bg-opacity-10 d-flex align-items-center justify-content-center mx-auto mb-3" 
+                         style="width: 70px; height: 70px;">
+                        <i class="fas fa-bell fa-2x text-warning"></i>
+                    </div>
+                    <h5 class="fw-bold">🔔 Alertas</h5>
+                    <p class="text-muted small">Recibe notificaciones cuando haya vehículos que coincidan con tus intereses.</p>
+                </div>
+            </div>
+
+            <!-- Beneficio 4: Historial -->
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm hover-card text-center p-4" style="border-radius: 16px;">
+                    <div class="rounded-circle bg-info bg-opacity-10 d-flex align-items-center justify-content-center mx-auto mb-3" 
+                         style="width: 70px; height: 70px;">
+                        <i class="fas fa-history fa-2x text-info"></i>
+                    </div>
+                    <h5 class="fw-bold">📊 Historial</h5>
+                    <p class="text-muted small">Revisa los vehículos que has visitado y encuentra lo que buscas fácilmente.</p>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- LOGO Y CONTACTO DIRECTO CENTRADOS -->
+            <!-- ============================================ -->
+            <div class="col-12">
+                <div class="row g-4 justify-content-center">
+                    
+                    <!-- ✅ LOGO CON NOMBRE (igual al Hero) -->
+                    <div class="col-md-5">
+                        <div class="card h-100 border-0 shadow-sm hover-card text-center p-4" style="border-radius: 16px; background: linear-gradient(135deg, #0a0a1a, #1a1a3e);">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <div style="background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 16px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);">
+                                    <img src="{{ asset('images/LogoTransventasGuatemala.png') }}" 
+                                         alt="TransVentas Guatemala" 
+                                         style="max-height: 100px; width: auto; display: block; filter: brightness(0) invert(1);">
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <h2 style="font-weight: 700; font-size: 2rem; color: #ffffff; letter-spacing: 1px; text-shadow: 0 2px 10px rgba(0,0,0,0.3); margin-bottom: 0;">
+                                    Transventas
+                                    <span style="color: #64b5f6;">Guatemala</span>
+                                </h2>
+                            </div>
+                            <p class="text-white-50 small mt-2">Tu plataforma de confianza para comprar y vender vehículos comerciales en Guatemala.</p>
+                            <div class="mt-2">
+                                <span class="badge bg-primary">🇬🇹 Hecho en Guatemala</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contacto Directo -->
+                    <div class="col-md-5">
+                        <div class="card h-100 border-0 shadow-sm hover-card text-center p-4" style="border-radius: 16px; border: 2px solid #28a745; background: linear-gradient(135deg, #ffffff, #f8f9fa);">
+                            <div class="rounded-circle bg-success bg-opacity-10 d-flex align-items-center justify-content-center mx-auto mb-3" 
+                                 style="width: 80px; height: 80px;">
+                                <i class="fas fa-envelope fa-2x text-success"></i>
+                            </div>
+                            <h4 class="fw-bold text-success">📧 Contacto Directo</h4>
+                            <p class="text-muted small">Envía mensajes directamente a los vendedores desde la página del vehículo.</p>
+                            <div class="mt-2">
+                                <span class="badge bg-success px-3 py-2" style="font-size: 0.9rem;">
+                                    <i class="fas fa-check-circle me-1"></i> ¡Disponible ahora!
+                                </span>
+                            </div>
+                            <hr class="my-3">
+                            <div class="text-start">
+                                <p class="text-muted small mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i> Contacta directamente al vendedor
+                                </p>
+                                <p class="text-muted small mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i> Recibe respuesta rápida
+                                </p>
+                                
+                            </div>
+                            <div class="mt-3 p-3 bg-light rounded-3">
+                                @auth
+                                    <small class="text-muted">
+                                        <i class="fas fa-check-circle text-success me-1"></i> 
+                                        <span class="fw-bold">¡Ya estás registrado!</span> 
+                                        Puedes contactar a los vendedores desde cualquier vehículo
+                                    </small>
+                                    <a href="{{ route('vehicles.index') }}" class="btn btn-success btn-sm mt-2 w-100">
+                                        <i class="fas fa-search"></i> Explorar Vehículos
+                                    </a>
+                                @else
+                                    <small class="text-muted">
+                                        <i class="fas fa-info-circle text-primary me-1"></i> 
+                                        <span class="fw-bold">¿Quieres contactar a los vendedores?</span> 
+                                        Regístrate gratis y empieza a enviar mensajes
+                                    </small>
+                                    <div class="d-flex gap-2 mt-2">
+                                        <a href="{{ route('register') }}" class="btn btn-primary btn-sm flex-grow-1">
+                                            <i class="fas fa-user-plus"></i> Registrarse
+                                        </a>
+                                        <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-sm flex-grow-1">
+                                            <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                                        </a>
+                                    </div>
+                                @endauth
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- LLAMADA A LA ACCIÓN -->
+            <div class="col-12 mt-4">
+                <div class="text-center p-4 rounded-4" 
+                     style="background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0d1b2a 100%);">
+                    <h3 class="text-white mb-3">
+                        <i class="fas fa-rocket text-primary"></i>
+                        ¡Únete a TransVentas Guatemala hoy!
+                    </h3>
+                    <p class="text-white-50 mb-3">Crea tu cuenta gratuita y disfruta de todos estos beneficios</p>
+                    @auth
+                        <a href="{{ route('vehicles.index') }}" class="btn btn-primary btn-lg px-5 rounded-pill">
+                            <i class="fas fa-search"></i> Explorar Vehículos
+                        </a>
+                    @else
+                        <a href="{{ route('register') }}" class="btn btn-primary btn-lg px-5 rounded-pill">
+                            <i class="fas fa-user-plus"></i> Registrarse Gratis
+                        </a>
+                        <a href="{{ route('login') }}" class="btn btn-outline-light btn-lg px-5 rounded-pill ms-2">
+                            <i class="fas fa-sign-in-alt"></i> Ya tengo cuenta
+                        </a>
+                    @endauth
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .hover-card {
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        cursor: default;
+    }
+    .hover-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.1) !important;
+    }
+</style>
+
 @push('scripts')
 <script>
 // ============================================

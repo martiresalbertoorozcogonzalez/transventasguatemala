@@ -230,15 +230,45 @@
                     
                     <hr>
                     
-                    <!-- Botones de acción -->
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-success btn-lg" onclick="contactar()">
-                            <i class="fas fa-phone"></i> Contactar Vendedor
-                        </button>
-                        <button class="btn btn-outline-primary" onclick="window.print()">
-                            <i class="fas fa-print"></i> Imprimir Ficha
-                        </button>
+                  
+                    
+                <!-- ============================================ -->
+                <!-- BOTÓN CONTACTAR VENDEDOR (SOLO REGISTRADOS) -->
+                <!-- ============================================ -->
+                 
+                <div class="d-grid gap-2">
+                @auth
+                    <button class="btn btn-success btn-lg" onclick="contactar()" style="background: linear-gradient(135deg, #28a745, #20c997); border: none;">
+                        <i class="fas fa-envelope me-2"></i> Contactar Vendedor
+                    </button>
+                @else
+                    <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 16px;">
+                        <div class="card-body text-center py-4">
+                            <div class="rounded-circle bg-primary bg-opacity-10 d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                                <i class="fas fa-envelope fa-2x text-primary"></i>
+                            </div>
+                            <h5 class="fw-bold">📩 Contacto exclusivo</h5>
+                            <p class="text-muted mb-3">Regístrate gratis para enviar mensajes al vendedor</p>
+                            <div class="d-flex gap-2 justify-content-center flex-wrap">
+                                <a href="{{ route('register') }}" class="btn btn-primary px-4 rounded-pill">
+                                    <i class="fas fa-user-plus"></i> Registrarse
+                                </a>
+                                <a href="{{ route('login') }}" class="btn btn-outline-secondary px-4 rounded-pill">
+                                    <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                                </a>
+                            </div>
+                            <p class="text-muted small mt-2">
+                                <i class="fas fa-shield-alt text-success"></i> 100% gratuito y seguro
+                            </p>
+                        </div>
                     </div>
+                @endauth
+                
+                <button class="btn btn-outline-primary" onclick="window.print()">
+                    <i class="fas fa-print"></i> Imprimir Ficha
+                </button>
+            </div>
+
                 </div>
             </div>
         </div>
@@ -293,45 +323,50 @@
     @endif
 </div>
 
-<!-- ============================================ -->
-<!-- MODAL DE CONTACTO -->
-<!-- ============================================ -->
-<div class="modal fade" id="contactModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-success text-white">
-                <h5 class="modal-title"><i class="fas fa-envelope"></i> Contactar Vendedor</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('contact.vehicle', $vehicle) }}" method="POST" id="contactForm">
-                    @csrf
-                    <input type="hidden" name="vehicle_id" value="{{ $vehicle->id }}">
-                    
-                    <div class="mb-3">
-                        <label class="form-label">Tu nombre <span class="text-danger">*</span></label>
-                        <input type="text" name="name" class="form-control" required>
+    @auth
+    
+        <!-- ============================================ -->
+        <!-- MODAL DE CONTACTO (SOLO REGISTRADOS) -->
+        <!-- ============================================ -->
+
+        <div class="modal fade" id="contactModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title"><i class="fas fa-envelope"></i> Enviar Mensaje</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Tu email <span class="text-danger">*</span></label>
-                        <input type="email" name="email" class="form-control" required>
+                    <div class="modal-body">
+                        <form action="{{ route('contact.vehicle', $vehicle) }}" method="POST" id="contactForm">
+                            @csrf
+                            <input type="hidden" name="vehicle_id" value="{{ $vehicle->id }}">
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Tu nombre <span class="text-danger">*</span></label>
+                                <input type="text" name="name" class="form-control" value="{{ auth()->user()->name }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Tu email <span class="text-danger">*</span></label>
+                                <input type="email" name="email" class="form-control" value="{{ auth()->user()->email }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Teléfono</label>
+                                <input type="tel" name="phone" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Mensaje <span class="text-danger">*</span></label>
+                                <textarea name="message" class="form-control" rows="3" required>Me interesa el vehículo: {{ $vehicle->title }}</textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">
+                                <i class="fas fa-paper-plane"></i> Enviar mensaje
+                            </button>
+                        </form>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Teléfono</label>
-                        <input type="tel" name="phone" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Mensaje <span class="text-danger">*</span></label>
-                        <textarea name="message" class="form-control" rows="3" required>Me interesa el vehículo: {{ $vehicle->title }}</textarea>
-                    </div>
-                    <button type="submit" class="btn btn-success w-100">
-                        <i class="fas fa-paper-plane"></i> Enviar mensaje
-                    </button>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+
+    @endauth
 
 <!-- ============================================ -->
 <!-- SCRIPTS -->
@@ -341,14 +376,18 @@
 // FUNCIÓN GLOBAL - CONTACTAR
 // ============================================
 function contactar() {
-    console.log('📞 Abriendo modal de contacto');
-    const modalElement = document.getElementById('contactModal');
-    if (modalElement) {
-        const modal = new bootstrap.Modal(modalElement);
-        modal.show();
-    } else {
-        console.error('❌ Modal no encontrado');
-    }
+    @auth
+        console.log('📧 Abriendo modal de contacto');
+        const modalElement = document.getElementById('contactModal');
+        if (modalElement) {
+            const modal = new bootstrap.Modal(modalElement);
+            modal.show();
+        } else {
+            console.error('❌ Modal no encontrado');
+        }
+    @else
+        window.location.href = "{{ route('login') }}";
+    @endauth
 }
 
 // ============================================
