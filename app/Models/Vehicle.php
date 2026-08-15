@@ -81,4 +81,8 @@ class Vehicle extends Model
     {
         return $this->favorites()->where('user_id', $userId)->exists();
     }
+
+
+
+    
 }

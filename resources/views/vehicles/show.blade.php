@@ -132,6 +132,27 @@
                     <!-- Precio -->
                     <h3 class="text-primary mb-4">{{ $vehicle->price_formatted }}</h3>
                     
+                    <!-- ✅ BOTÓN DE FAVORITOS -->
+                    @auth
+                    <div class="mb-3">
+                        <form action="{{ route('favorites.toggle', $vehicle) }}" method="POST" id="favoriteForm">
+                            @csrf
+                            <button type="submit" 
+                                    class="btn w-100 {{ auth()->user()->hasFavorited($vehicle->id) ? 'btn-danger' : 'btn-outline-danger' }}">
+                                <i class="fas fa-heart"></i>
+                                {{ auth()->user()->hasFavorited($vehicle->id) ? ' Eliminar de favoritos' : ' Agregar a favoritos' }}
+                                <span class="badge bg-light text-dark ms-2">{{ $vehicle->favorites()->count() }}</span>
+                            </button>
+                        </form>
+                    </div>
+                    @else
+                    <div class="mb-3">
+                        <a href="{{ route('login') }}" class="btn btn-outline-danger w-100">
+                            <i class="fas fa-heart"></i> Inicia sesión para agregar a favoritos
+                        </a>
+                    </div>
+                    @endauth
+                    
                     <hr>
                     
                     <!-- Especificaciones principales -->
@@ -312,6 +333,9 @@
     </div>
 </div>
 
+<!-- ============================================ -->
+<!-- SCRIPTS -->
+<!-- ============================================ -->
 <script>
 // ============================================
 // FUNCIÓN GLOBAL - CONTACTAR
@@ -325,6 +349,85 @@ function contactar() {
     } else {
         console.error('❌ Modal no encontrado');
     }
+}
+
+// ============================================
+// FUNCIÓN GLOBAL - TOGGLE FAVORITOS
+// ============================================
+function toggleFavorite(vehicleId, element) {
+    console.log('❤️ Toggle favorite:', vehicleId);
+    
+    const url = `/favorites/${vehicleId}/toggle`;
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
+    
+    if (!csrfToken) {
+        console.error('❌ CSRF token no encontrado');
+        return;
+    }
+    
+    // Mostrar loading
+    if (element) {
+        element.disabled = true;
+        const originalHtml = element.innerHTML;
+        element.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+        element.dataset.originalHtml = originalHtml;
+    }
+    
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken,
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('📦 Data:', data);
+        
+        if (data.redirect) {
+            window.location.href = data.redirect;
+            return;
+        }
+        
+        if (data.success) {
+            // Actualizar el botón en el detalle
+            const btn = document.getElementById('favoriteBtn');
+            const text = document.getElementById('favoriteText');
+            const count = document.getElementById('favoriteCount');
+            
+            if (btn) {
+                if (data.isFavorited) {
+                    btn.className = 'btn btn-danger w-100';
+                    if (text) text.textContent = 'Eliminar de favoritos';
+                } else {
+                    btn.className = 'btn btn-outline-danger w-100';
+                    if (text) text.textContent = 'Agregar a favoritos';
+                }
+            }
+            
+            if (count) {
+                count.textContent = data.count;
+            }
+            
+            // Mostrar mensaje
+            if (data.message) {
+                alert(data.message);
+            }
+        }
+    })
+    .catch(error => {
+        console.error('💥 Error:', error);
+        alert('❌ Error al procesar la solicitud');
+    })
+    .finally(() => {
+        if (element) {
+            element.disabled = false;
+            if (element.dataset.originalHtml) {
+                element.innerHTML = element.dataset.originalHtml;
+            }
+        }
+    });
 }
 
 // ============================================
@@ -383,9 +486,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Mostrar alerta
                 if (data.success) {
-                    showAlert('success', '✅ ' + data.message);
+                    alert('✅ ' + data.message);
                 } else {
-                    showAlert('danger', '❌ ' + (data.message || 'Error al enviar'));
+                    alert('❌ ' + (data.message || 'Error al enviar'));
                 }
                 
                 this.reset();
@@ -395,7 +498,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (modal) {
                     modal.hide();
                 }
-                showAlert('danger', '❌ Error al enviar: ' + error.message);
+                alert('❌ Error al enviar: ' + error.message);
             })
             .finally(() => {
                 submitBtn.disabled = false;
@@ -404,67 +507,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+</script>
 
-// ============================================
-// FUNCIÓN PARA MOSTRAR ALERTAS
-// ============================================
-function showAlert(type, message) {
-    // Remover alertas anteriores
-    document.querySelectorAll('.custom-alert').forEach(el => el.remove());
-    
-    const alertDiv = document.createElement('div');
-    alertDiv.className = `custom-alert alert alert-${type} alert-dismissible fade show`;
-    alertDiv.style.cssText = `
-        position: fixed; 
-        top: 20px; 
-        right: 20px; 
-        z-index: 9999; 
-        min-width: 320px; 
-        max-width: 500px; 
-        box-shadow: 0 10px 40px rgba(0,0,0,0.2); 
-        border-radius: 12px; 
-        padding: 20px 25px;
-        animation: slideInRight 0.5s ease;
-    `;
-    
-    const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
-    const color = type === 'success' ? '#28a745' : '#dc3545';
-    const title = type === 'success' ? '¡Mensaje enviado!' : '¡Error!';
-    
-    alertDiv.innerHTML = `
-        <div class="d-flex align-items-center">
-            <i class="fas ${icon} fa-2x me-3" style="color: ${color};"></i>
-            <div class="flex-grow-1">
-                <strong class="d-block" style="font-size: 1rem;">${title}</strong>
-                <span style="font-size: 0.95rem;">${message}</span>
-            </div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    `;
-    
-    document.body.appendChild(alertDiv);
-    
-    setTimeout(() => {
-        if (alertDiv.parentNode) {
-            alertDiv.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            alertDiv.style.opacity = '0';
-            alertDiv.style.transform = 'translateX(100px)';
-            setTimeout(() => {
-                if (alertDiv.parentNode) {
-                    alertDiv.remove();
-                }
-            }, 500);
-        }
-    }, 6000);
-}
-
-// Agregar estilos de animación
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideInRight {
-        from { transform: translateX(100px); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-    }
+<style>
     .hover-card {
         transition: all 0.3s ease;
         cursor: pointer;
@@ -482,8 +527,15 @@ style.textContent = `
     .text-justify {
         text-align: justify;
     }
-`;
-document.head.appendChild(style);
-</script>
+    .sticky-top {
+        z-index: 1;
+    }
+    @media (max-width: 992px) {
+        .sticky-top {
+            position: relative !important;
+            top: 0 !important;
+        }
+    }
+</style>
 
 @endsection

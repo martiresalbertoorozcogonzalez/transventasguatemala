@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\Admin\VehicleController as AdminVehicleController;
-use App\Http\Controllers\Admin\ContactController as AdminContactController;
+use App\Http\Controllers\FavoriteController;   
 use App\Http\Controllers\FilterController;
-use App\Http\Controllers\FavoriteController;
-use App\Http\Controllers\ContactController;
+         
+use App\Http\Controllers\ContactController; 
+use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -85,4 +86,16 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('contacts', AdminContactController::class)->only(['index', 'show', 'destroy']);
     Route::post('/contacts/{contact}/responded', [AdminContactController::class, 'markAsResponded'])->name('contacts.responded');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/favorites/{vehicle}/toggle', [FavoriteController::class, 'toggle'])->name('favorites.toggle');
+    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
+});
+
+// Rutas de favoritos
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/favorites/{vehicle}/toggle', [FavoriteController::class, 'toggle'])->name('favorites.toggle');
+    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
 });

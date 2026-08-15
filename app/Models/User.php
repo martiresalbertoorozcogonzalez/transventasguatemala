@@ -31,4 +31,28 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+        public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function hasFavorited($vehicleId)
+    {
+        return $this->favorites()->where('vehicle_id', $vehicleId)->exists();
+    }
+
+    public function toggleFavorite($vehicleId)
+    {
+        $favorite = $this->favorites()->where('vehicle_id', $vehicleId);
+        
+        if ($favorite->exists()) {
+            $favorite->delete();
+            return false;
+        } else {
+            $this->favorites()->create(['vehicle_id' => $vehicleId]);
+            return true;
+        }
+    }
 }

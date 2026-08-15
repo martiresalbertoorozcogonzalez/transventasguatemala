@@ -9,6 +9,7 @@
                  style="border-radius: 20px; overflow: hidden; transition: all 0.4s; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
                 
                 <div class="position-relative overflow-hidden">
+
                     <a href="/vehiculos/{{ $vehicle->slug }}">
                         <div style="width: 100%; height: 240px; background: #ffffff; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; padding: 5px;">
                             @if($vehicle->images && count($vehicle->images) > 0)
@@ -29,6 +30,19 @@
                             <i class="fas fa-star me-1"></i> Destacado
                         </span>
                     @endif
+
+                    @auth
+                    <form action="{{ route('favorites.toggle', $vehicle) }}" method="POST" style="position: absolute; top: 10px; right: 10px; z-index: 10;">
+                        @csrf
+                        <button type="submit" 
+                                class="btn btn-sm rounded-circle shadow-sm favorite-btn"
+                                style="width: 36px; height: 36px; padding: 0; border: none; background: white;"
+                                title="{{ auth()->user()->hasFavorited($vehicle->id) ? 'Eliminar de favoritos' : 'Agregar a favoritos' }}">
+                            <i class="fas fa-heart {{ auth()->user()->hasFavorited($vehicle->id) ? 'text-danger' : 'text-muted' }}"></i>
+                        </button>
+                    </form>
+                    @endauth
+
                 </div>
                 
                 <div class="card-body">
