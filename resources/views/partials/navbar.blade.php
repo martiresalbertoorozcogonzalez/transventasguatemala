@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0d1b2a 100%); padding: 12px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
     <div class="container">
         <!-- Logo -->
@@ -34,14 +33,61 @@
                         <i class="fas fa-home"></i> Inicio
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('vehicles.*') ? 'active' : '' }}" 
-                       href="{{ route('vehicles.index') }}"
-                       style="color: rgba(255,255,255,0.8); font-weight: 500; padding: 8px 18px; border-radius: 8px; transition: all 0.3s;">
+                
+                <!-- ✅ DROPDOWN DE VEHÍCULOS -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle {{ request()->routeIs('vehicles.*') ? 'active' : '' }}" 
+                    href="#" 
+                    id="vehiclesDropdown" 
+                    role="button" 
+                    data-bs-toggle="dropdown" 
+                    aria-expanded="false"
+                    style="color: rgba(255,255,255,0.8); font-weight: 500; padding: 8px 18px; border-radius: 8px; transition: all 0.3s;">
                         <i class="fas fa-truck"></i> Vehículos
                     </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" 
+                        style="background: #1a1a3e; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
+                        
+                        <li>
+                            <a class="dropdown-item" href="{{ route('vehicles.index') }}"
+                            style="color: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 8px; margin: 2px 0; transition: all 0.3s;">
+                                <i class="fas fa-list me-2"></i> Todos los Vehículos
+                            </a>
+                        </li>
+                        
+                        <li><hr class="dropdown-divider" style="border-color: rgba(255,255,255,0.1);"></li>
+                        
+                        <li>
+                            <a class="dropdown-item" href="{{ route('vehicles.index') }}?type=camion"
+                            style="color: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 8px; margin: 2px 0; transition: all 0.3s;">
+                                <i class="fas fa-truck me-2"></i> 🚛 Camiones
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a class="dropdown-item" href="{{ route('vehicles.index') }}?type=furgon"
+                            style="color: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 8px; margin: 2px 0; transition: all 0.3s;">
+                                <i class="fas fa-truck me-2"></i> 🚐 Furgones
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a class="dropdown-item" href="{{ route('vehicles.index') }}?type=plataforma"
+                            style="color: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 8px; margin: 2px 0; transition: all 0.3s;">
+                                <i class="fas fa-cube me-2"></i> 📦 Plataformas
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a class="dropdown-item" href="{{ route('vehicles.index') }}?type=remolque"
+                            style="color: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 8px; margin: 2px 0; transition: all 0.3s;">
+                                <i class="fas fa-link me-2"></i> 🔗 Remolques
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-                <!-- ✅ BENEFICIOS - USANDO URL DIRECTA -->
+
+                <!-- Beneficios -->
                 <li class="nav-item">
                     <a class="nav-link" 
                        href="/beneficios"
@@ -49,6 +95,7 @@
                         <i class="fas fa-star"></i> Beneficios
                     </a>
                 </li>
+                
                 @auth
                     @if(auth()->user()->is_admin)
                         <li class="nav-item">
@@ -125,24 +172,39 @@
 </nav>
 
 <style>
+    /* ============================================ */
+    /* ESTILOS DEL NAVBAR */
+    /* ============================================ */
+    
     .navbar-nav .nav-link:hover {
         color: #ffffff !important;
         background: rgba(255,255,255,0.1);
     }
+    
     .navbar-nav .nav-link.active {
         color: #ffffff !important;
         background: rgba(13, 110, 253, 0.3);
     }
+    
     .dropdown-item:hover {
         background: rgba(255,255,255,0.1) !important;
         color: #ffffff !important;
     }
+    
+    .dropdown-item i {
+        width: 20px;
+        text-align: center;
+    }
+    
     @media (max-width: 992px) {
         .navbar-nav .nav-link {
             padding: 10px 15px !important;
         }
         .navbar-nav .nav-link.active {
             background: rgba(13, 110, 253, 0.2);
+        }
+        .dropdown-menu {
+            background: rgba(26, 26, 62, 0.95) !important;
         }
     }
 </style>

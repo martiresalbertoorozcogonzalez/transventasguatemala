@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 mb-3">
-                <h5><i class="fas fa-truck"></i> TransVentas Guatemala</h5>
+                <h5><i class="fas fa-truck"></i>TransVentas <span style="color: #64b5f6;">Guatemala</span></h5>
                 <p class="text-muted">Tu plataforma de confianza para comprar y vender vehículos comerciales.</p>
             </div>
             <div class="col-md-4 mb-3">
@@ -29,7 +29,7 @@
         </div>
         <hr class="border-light">
         <div class="text-center">
-            <small>&copy; {{ date('Y') }} TransVentas Guatemala. Todos los derechos reservados.</small>
+            <small>&copy; {{ date('Y') }} TransVentas <span style="color: #64b5f6;">Guatemala.</span> Todos los derechos reservados.</small>
         </div>
     </div>
 </footer>

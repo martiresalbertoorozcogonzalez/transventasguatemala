@@ -103,7 +103,30 @@
             </div>
         </div>
 
-        <!-- ✅ Beneficio 5: Publicar Vehículos (Próximamente) -->
+        <!-- ✅ LOGO DE TRANSVENTAS GUATEMALA (centrado) -->
+        <div class="col-md-6 col-lg-4 mx-auto">
+            <div class="card h-100 border-0 shadow-sm hover-card text-center p-4" style="border-radius: 16px; background: linear-gradient(135deg, #0a0a1a, #1a1a3e);">
+                <div class="d-flex align-items-center justify-content-center mb-3">
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 16px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);">
+                        <img src="{{ asset('images/LogoTransventasGuatemala.png') }}" 
+                             alt="TransVentas Guatemala" 
+                             style="max-height: 100px; width: auto; display: block; filter: brightness(0) invert(1);">
+                    </div>
+                </div>
+                <div>
+                    <h4 style="font-weight: 700; font-size: 1.8rem; color: #ffffff; letter-spacing: 0.5px; text-shadow: 0 2px 10px rgba(0,0,0,0.3); margin-bottom: 0;">
+                        Transventas
+                        <span style="color: #64b5f6;">Guatemala</span>
+                    </h4>
+                </div>
+                <p class="text-white-50 small mt-3">Tu pagina de confianza para comprar y vender vehículos comerciales en Guatemala.</p>
+                <div class="mt-2">
+                    <span class="badge bg-primary">🇬🇹 Hecho en Guatemala</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Beneficio 5: Publicar Vehículos (Próximamente) -->
         <div class="col-md-6 col-lg-4">
             <div class="card h-100 border-0 shadow-sm hover-card text-center p-4" style="border-radius: 16px; border: 2px dashed #dee2e6; background: linear-gradient(135deg, #ffffff, #f8f9fa);">
                 <div class="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center mx-auto mb-3" 
@@ -114,10 +137,6 @@
                 <p class="text-muted small">¿Tienes vehículos que quieres vender? Pronto podrás publicar tus anuncios.</p>
                 
                 <div class="mt-2">
-                    <span class="badge bg-warning text-dark px-3 py-2" style="font-size: 0.85rem;">
-                        <i class="fas fa-clock me-1"></i> Próximamente
-                    </span>
-                    <br>
                     <span class="badge bg-danger mt-1 px-3 py-2" style="font-size: 0.75rem;">
                         <i class="fas fa-hourglass-half me-1"></i> Opción aún no disponible
                     </span>
@@ -136,35 +155,16 @@
                         <i class="fas fa-chart-line text-primary me-2"></i> Estadísticas de tus publicaciones
                     </p>
                     <p class="text-muted small mb-0">
-                        <i class="fas fa-bell text-primary me-2"></i> Recibe notificaciones de interés
+                        <i class="fas fa-bell text-primary me-2"></i> Recibe notificaciones de mensajes de interésados
                     </p>
                 </div>
                 
-               
-                <!-- <div class="mt-3">
-                    <a href="{{ route('register') }}" class="btn btn-primary btn-sm w-100">
-                        <i class="fas fa-user-plus"></i> Registrarme para aviso
-                    </a>
-                </div> -->
+                
+                
+                
             </div>
         </div>
 
-        <!-- Beneficio 6: Soporte Prioritario (opcional) -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 border-0 shadow-sm hover-card text-center p-4" style="border-radius: 16px;">
-                <div class="rounded-circle bg-danger bg-opacity-10 d-flex align-items-center justify-content-center mx-auto mb-3" 
-                     style="width: 80px; height: 80px;">
-                    <i class="fas fa-headset fa-3x text-danger"></i>
-                </div>
-                <h4 class="fw-bold">💬 Soporte Prioritario</h4>
-                <p class="text-muted">Como usuario registrado, tienes acceso a soporte prioritario para resolver tus dudas.</p>
-                <ul class="list-unstyled text-start text-muted mt-2">
-                    <li><i class="fas fa-check-circle text-success me-2"></i> Atención prioritaria</li>
-                    <li><i class="fas fa-check-circle text-success me-2"></i> Resolución rápida</li>
-                    <li><i class="fas fa-check-circle text-success me-2"></i> Asesoría personalizada</li>
-                </ul>
-            </div>
-        </div>
     </div>
 
     <!-- ============================================ -->
