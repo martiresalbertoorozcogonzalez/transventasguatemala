@@ -120,7 +120,15 @@
                             <span>{{ auth()->user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" style="background: #1a1a3e; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 8px 0; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
+                           
                             <li>
+                                <a class="dropdown-item" href="{{ route('alerts.index') }}" 
+                                   style="color: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 8px; margin: 2px 8px; transition: all 0.3s;">
+                                    <i class="fas fa-regular fa-bell text-white me-2"></i> Mis Alertas
+                                </a>
+                            </li>
+
+                             <li>
                                 <a class="dropdown-item" href="{{ route('favorites.index') }}" 
                                    style="color: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 8px; margin: 2px 8px; transition: all 0.3s;">
                                     <i class="fas fa-heart text-danger me-2"></i> Mis Favoritos

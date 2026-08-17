@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AlertController;           
+
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\Admin\VehicleController as AdminVehicleController;
 use App\Http\Controllers\FavoriteController;
@@ -95,4 +97,15 @@ Route::get('/dashboard', function () {
     
     Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
 
+});
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/alerts', [AlertController::class, 'index'])->name('alerts.index');
+    Route::get('/alerts/create', [AlertController::class, 'create'])->name('alerts.create');
+    Route::post('/alerts', [AlertController::class, 'store'])->name('alerts.store');
+    Route::get('/alerts/{alert}/edit', [AlertController::class, 'edit'])->name('alerts.edit');
+    Route::put('/alerts/{alert}', [AlertController::class, 'update'])->name('alerts.update');
+    Route::post('/alerts/{alert}/toggle', [AlertController::class, 'toggle'])->name('alerts.toggle');
+    Route::delete('/alerts/{alert}', [AlertController::class, 'destroy'])->name('alerts.destroy');
 });

@@ -55,4 +55,17 @@ class User extends Authenticatable
             return true;
         }
     }
+
+
+    public function alerts()
+    {
+        return $this->hasMany(Alert::class);
+    }
+
+    public function hasActiveAlerts()
+    {
+        return $this->alerts()->where('is_active', true)->exists();
+    }
+
+
 }

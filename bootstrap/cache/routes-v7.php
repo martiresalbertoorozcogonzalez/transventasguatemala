@@ -32,7 +32,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::CSsz8MPEuNBEAUGk',
+            '_route' => 'generated::FfuO9RBN4dgJRJaN',
           ),
           1 => NULL,
           2 => 
@@ -169,7 +169,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::RKJpf0OiAy6Hy3gx',
+            '_route' => 'generated::aa4paaHkr8tWBhZy',
           ),
           1 => NULL,
           2 => 
@@ -205,7 +205,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::rRizoTWWuA6CWTnJ',
+            '_route' => 'generated::KxAiYkiqlfQtTKFp',
           ),
           1 => NULL,
           2 => 
@@ -335,7 +335,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::rSqrwF23pmX7Xy15',
+            '_route' => 'generated::nNEjvsSgSzq5qgI1',
           ),
           1 => NULL,
           2 => 
@@ -522,10 +522,66 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
+      '/alerts' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'alerts.index',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'alerts.store',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/alerts/create' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'alerts.create',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
     ),
     2 => 
     array (
-      0 => '{^(?|/ve(?|hiculos/([^/]++)(?|(*:32)|/contactar(*:49))|rify\\-email/([^/]++)/([^/]++)(*:86))|/reset\\-password/([^/]++)(*:119)|/favorites/([^/]++)/toggle(*:153)|/admin/(?|vehicles/([^/]++)(?|(*:191)|/(?|edit(*:207)|image(*:220)|delete\\-image(*:241)|status(*:255)|toggle\\-featured(*:279))|(*:288))|contacts/([^/]++)(?|(*:317)|/responded(*:335)))|/storage/(.*)(?|(*:361)))/?$}sDu',
+      0 => '{^(?|/ve(?|hiculos/([^/]++)(?|(*:32)|/contactar(*:49))|rify\\-email/([^/]++)/([^/]++)(*:86))|/reset\\-password/([^/]++)(*:119)|/favorites/([^/]++)/toggle(*:153)|/a(?|dmin/(?|vehicles/([^/]++)(?|(*:194)|/(?|edit(*:210)|image(*:223)|delete\\-image(*:244)|status(*:258)|toggle\\-featured(*:282))|(*:291))|contacts/([^/]++)(?|(*:320)|/responded(*:338)))|lerts/([^/]++)(?|/(?|edit(*:373)|toggle(*:387))|(*:396)))|/storage/(.*)(?|(*:422)))/?$}sDu',
     ),
     3 => 
     array (
@@ -643,7 +699,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      191 => 
+      194 => 
       array (
         0 => 
         array (
@@ -666,7 +722,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      207 => 
+      210 => 
       array (
         0 => 
         array (
@@ -689,7 +745,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      220 => 
+      223 => 
       array (
         0 => 
         array (
@@ -711,7 +767,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      241 => 
+      244 => 
       array (
         0 => 
         array (
@@ -733,7 +789,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      255 => 
+      258 => 
       array (
         0 => 
         array (
@@ -755,7 +811,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      279 => 
+      282 => 
       array (
         0 => 
         array (
@@ -777,7 +833,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      288 => 
+      291 => 
       array (
         0 => 
         array (
@@ -819,7 +875,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      317 => 
+      320 => 
       array (
         0 => 
         array (
@@ -861,7 +917,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      335 => 
+      338 => 
       array (
         0 => 
         array (
@@ -883,7 +939,93 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      361 => 
+      373 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'alerts.edit',
+          ),
+          1 => 
+          array (
+            0 => 'alert',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      387 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'alerts.toggle',
+          ),
+          1 => 
+          array (
+            0 => 'alert',
+          ),
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      396 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'alerts.update',
+          ),
+          1 => 
+          array (
+            0 => 'alert',
+          ),
+          2 => 
+          array (
+            'PUT' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'alerts.destroy',
+          ),
+          1 => 
+          array (
+            0 => 'alert',
+          ),
+          2 => 
+          array (
+            'DELETE' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      422 => 
       array (
         0 => 
         array (
@@ -987,7 +1129,7 @@ app('router')->setCompiledRoutes(
             }
 
             return response()->json([\'status\' => \'logged\']);
-        }";s:5:"scope";s:34:"Laravel\\Boost\\BoostServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000006950000000000000000";}}',
+        }";s:5:"scope";s:34:"Laravel\\Boost\\BoostServiceProvider";s:4:"this";N;s:4:"self";s:32:"000000000000069c0000000000000000";}}',
         'as' => 'boost.browser-logs',
         'excluded_middleware' => 
         array (
@@ -1008,7 +1150,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::CSsz8MPEuNBEAUGk' => 
+    'generated::FfuO9RBN4dgJRJaN' => 
     array (
       'methods' => 
       array (
@@ -1044,8 +1186,8 @@ app('router')->setCompiledRoutes(
                     return response(\\Illuminate\\Support\\Facades\\View::file(\'C:\\\\laragon\\\\www\\\\transventasguatemala\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Configuration\'.\'/../resources/health-up.blade.php\', [
                         \'exception\' => $exception,
                     ]), status: $status);
-                }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"00000000000006dc0000000000000000";}}',
-        'as' => 'generated::CSsz8MPEuNBEAUGk',
+                }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"00000000000006e30000000000000000";}}',
+        'as' => 'generated::FfuO9RBN4dgJRJaN',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1357,7 +1499,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::RKJpf0OiAy6Hy3gx' => 
+    'generated::aa4paaHkr8tWBhZy' => 
     array (
       'methods' => 
       array (
@@ -1378,7 +1520,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::RKJpf0OiAy6Hy3gx',
+        'as' => 'generated::aa4paaHkr8tWBhZy',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1432,7 +1574,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::rRizoTWWuA6CWTnJ' => 
+    'generated::KxAiYkiqlfQtTKFp' => 
     array (
       'methods' => 
       array (
@@ -1453,7 +1595,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::rRizoTWWuA6CWTnJ',
+        'as' => 'generated::KxAiYkiqlfQtTKFp',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1773,7 +1915,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::rSqrwF23pmX7Xy15' => 
+    'generated::nNEjvsSgSzq5qgI1' => 
     array (
       'methods' => 
       array (
@@ -1794,7 +1936,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::rSqrwF23pmX7Xy15',
+        'as' => 'generated::nNEjvsSgSzq5qgI1',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1977,7 +2119,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'O:55:"Laravel\\SerializableClosure\\UnsignedSerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:60:"function () {
         return \\view(\'admin.dashboard\');
-    }";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000006f20000000000000000";}}',
+    }";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000006f90000000000000000";}}',
         'as' => 'admin.dashboard',
         'namespace' => NULL,
         'prefix' => '/admin',
@@ -2596,13 +2738,275 @@ app('router')->setCompiledRoutes(
     }
     return \\redirect()->route(\'home\');
 
-    }";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000006df0000000000000000";}}',
+    }";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000006e60000000000000000";}}',
         'namespace' => NULL,
         'prefix' => '',
         'where' => 
         array (
         ),
         'as' => 'dashboard',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'alerts.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'alerts',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\AlertController@index',
+        'controller' => 'App\\Http\\Controllers\\AlertController@index',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'alerts.index',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'alerts.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'alerts/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\AlertController@create',
+        'controller' => 'App\\Http\\Controllers\\AlertController@create',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'alerts.create',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'alerts.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'alerts',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\AlertController@store',
+        'controller' => 'App\\Http\\Controllers\\AlertController@store',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'alerts.store',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'alerts.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'alerts/{alert}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\AlertController@edit',
+        'controller' => 'App\\Http\\Controllers\\AlertController@edit',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'alerts.edit',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'alerts.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+      ),
+      'uri' => 'alerts/{alert}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\AlertController@update',
+        'controller' => 'App\\Http\\Controllers\\AlertController@update',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'alerts.update',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'alerts.toggle' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'alerts/{alert}/toggle',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\AlertController@toggle',
+        'controller' => 'App\\Http\\Controllers\\AlertController@toggle',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'alerts.toggle',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'alerts.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'alerts/{alert}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\AlertController@destroy',
+        'controller' => 'App\\Http\\Controllers\\AlertController@destroy',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'alerts.destroy',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2634,7 +3038,7 @@ app('router')->setCompiledRoutes(
                         $config,
                         $isProduction
                     ))($request, $path);
-                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000006ff0000000000000000";}}',
+                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000007060000000000000000";}}',
         'as' => 'storage.local',
       ),
       'fallback' => false,
@@ -2667,7 +3071,7 @@ app('router')->setCompiledRoutes(
                         $config,
                         $isProduction
                     ))($request, $path);
-                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000007070000000000000000";}}',
+                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000007150000000000000000";}}',
         'as' => 'storage.local.upload',
       ),
       'fallback' => false,
