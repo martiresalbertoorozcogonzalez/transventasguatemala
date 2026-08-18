@@ -18,7 +18,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 40%, #0d1b2a 100%;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 40%, #0d1b2a 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -108,14 +108,6 @@
             margin-top: 4px;
         }
         
-        .password-requirements .valid {
-            color: #198754;
-        }
-        
-        .password-requirements .invalid {
-            color: #dc3545;
-        }
-        
         @media (max-width: 576px) {
             .register-card {
                 padding: 30px 20px;
@@ -129,9 +121,7 @@
 <body>
     
     <div class="register-card">
-        <!-- ============================================ -->
         <!-- LOGO Y MARCA -->
-        <!-- ============================================ -->
         <div class="text-center mb-4">
             <a href="/">
                 <img src="{{ asset('images/LogoTransventasGuatemala.png') }}" 
@@ -147,9 +137,7 @@
             </p>
         </div>
         
-        <!-- ============================================ -->
         <!-- MENSAJES DE ERROR -->
-        <!-- ============================================ -->
         @if($errors->any())
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <i class="fas fa-exclamation-circle me-2"></i>
@@ -162,13 +150,10 @@
             </div>
         @endif
         
-        <!-- ============================================ -->
         <!-- FORMULARIO DE REGISTRO -->
-        <!-- ============================================ -->
         <form method="POST" action="{{ route('register') }}">
             @csrf
             
-            <!-- Redirect (si viene de alguna página) -->
             @if(request()->has('redirect'))
                 <input type="hidden" name="redirect" value="{{ request('redirect') }}">
             @endif
@@ -257,9 +242,7 @@
             </button>
         </form>
         
-        <!-- ============================================ -->
         <!-- ENLACE A LOGIN -->
-        <!-- ============================================ -->
         <div class="text-center mt-4">
             <p class="text-muted small">
                 ¿Ya tienes cuenta? 
@@ -269,9 +252,7 @@
             </p>
         </div>
         
-        <!-- ============================================ -->
         <!-- BENEFICIOS DE REGISTRARSE -->
-        <!-- ============================================ -->
         <div class="mt-4 p-3 bg-light rounded-3" style="border: 1px solid #e9ecef;">
             <small class="text-muted d-block text-center fw-semibold mb-2">✨ Beneficios al registrarte</small>
             <div class="row text-center small">
@@ -294,9 +275,7 @@
         </div>
     </div>
     
-    <!-- ============================================ -->
     <!-- SCRIPTS -->
-    <!-- ============================================ -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>

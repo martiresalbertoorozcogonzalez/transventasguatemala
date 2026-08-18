@@ -32,7 +32,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::FfuO9RBN4dgJRJaN',
+            '_route' => 'generated::tnOIbe7WmeV64sW8',
           ),
           1 => NULL,
           2 => 
@@ -169,7 +169,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::aa4paaHkr8tWBhZy',
+            '_route' => 'generated::XjstDQqefHN3e96C',
           ),
           1 => NULL,
           2 => 
@@ -205,7 +205,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::KxAiYkiqlfQtTKFp',
+            '_route' => 'generated::B8C9AurUybFcnnWz',
           ),
           1 => NULL,
           2 => 
@@ -335,7 +335,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::nNEjvsSgSzq5qgI1',
+            '_route' => 'generated::4yHBWLjxDesQInQ6',
           ),
           1 => NULL,
           2 => 
@@ -578,10 +578,50 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
+      '/mis-mensajes' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'user.messages.index',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/mis-mensajes/unread/count' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'user.messages.unread-count',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
     ),
     2 => 
     array (
-      0 => '{^(?|/ve(?|hiculos/([^/]++)(?|(*:32)|/contactar(*:49))|rify\\-email/([^/]++)/([^/]++)(*:86))|/reset\\-password/([^/]++)(*:119)|/favorites/([^/]++)/toggle(*:153)|/a(?|dmin/(?|vehicles/([^/]++)(?|(*:194)|/(?|edit(*:210)|image(*:223)|delete\\-image(*:244)|status(*:258)|toggle\\-featured(*:282))|(*:291))|contacts/([^/]++)(?|(*:320)|/responded(*:338)))|lerts/([^/]++)(?|/(?|edit(*:373)|toggle(*:387))|(*:396)))|/storage/(.*)(?|(*:422)))/?$}sDu',
+      0 => '{^(?|/ve(?|hiculos/([^/]++)(?|(*:32)|/(?|con(?|tactar(*:55)|versacion(*:71))|enviar\\-mensaje(*:94)))|rify\\-email/([^/]++)/([^/]++)(*:132))|/reset\\-password/([^/]++)(*:166)|/favorites/([^/]++)/toggle(*:200)|/a(?|dmin/(?|vehicles/([^/]++)(?|(*:241)|/(?|edit(*:257)|image(*:270)|delete\\-image(*:291)|status(*:305)|toggle\\-featured(*:329))|(*:338))|contacts/([^/]++)(?|(*:367)|/(?|responded(*:388)|send\\-response(*:410))))|lerts/([^/]++)(?|/(?|edit(*:446)|toggle(*:460))|(*:469)))|/mis\\-mensajes/([^/]++)(?|(*:505)|/(?|enviar(*:523)|mark\\-read(*:541)))|/storage/(.*)(?|(*:567)))/?$}sDu',
     ),
     3 => 
     array (
@@ -608,7 +648,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      49 => 
+      55 => 
       array (
         0 => 
         array (
@@ -630,7 +670,52 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      86 => 
+      71 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'contact.conversation',
+          ),
+          1 => 
+          array (
+            0 => 'vehicle',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      94 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'contact.send-message',
+          ),
+          1 => 
+          array (
+            0 => 'vehicle',
+          ),
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      132 => 
       array (
         0 => 
         array (
@@ -654,7 +739,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      119 => 
+      166 => 
       array (
         0 => 
         array (
@@ -677,7 +762,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      153 => 
+      200 => 
       array (
         0 => 
         array (
@@ -699,7 +784,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      194 => 
+      241 => 
       array (
         0 => 
         array (
@@ -722,7 +807,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      210 => 
+      257 => 
       array (
         0 => 
         array (
@@ -745,7 +830,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      223 => 
+      270 => 
       array (
         0 => 
         array (
@@ -767,7 +852,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      244 => 
+      291 => 
       array (
         0 => 
         array (
@@ -789,7 +874,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      258 => 
+      305 => 
       array (
         0 => 
         array (
@@ -811,7 +896,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      282 => 
+      329 => 
       array (
         0 => 
         array (
@@ -833,7 +918,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      291 => 
+      338 => 
       array (
         0 => 
         array (
@@ -875,7 +960,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      320 => 
+      367 => 
       array (
         0 => 
         array (
@@ -917,7 +1002,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      338 => 
+      388 => 
       array (
         0 => 
         array (
@@ -939,7 +1024,29 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      373 => 
+      410 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.contacts.send-response',
+          ),
+          1 => 
+          array (
+            0 => 'contact',
+          ),
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      446 => 
       array (
         0 => 
         array (
@@ -962,7 +1069,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      387 => 
+      460 => 
       array (
         0 => 
         array (
@@ -984,7 +1091,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      396 => 
+      469 => 
       array (
         0 => 
         array (
@@ -1025,7 +1132,74 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      422 => 
+      505 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'user.messages.show',
+          ),
+          1 => 
+          array (
+            0 => 'contact',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      523 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'user.messages.send',
+          ),
+          1 => 
+          array (
+            0 => 'contact',
+          ),
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      541 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'user.messages.mark-read',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      567 => 
       array (
         0 => 
         array (
@@ -1129,7 +1303,7 @@ app('router')->setCompiledRoutes(
             }
 
             return response()->json([\'status\' => \'logged\']);
-        }";s:5:"scope";s:34:"Laravel\\Boost\\BoostServiceProvider";s:4:"this";N;s:4:"self";s:32:"000000000000069c0000000000000000";}}',
+        }";s:5:"scope";s:34:"Laravel\\Boost\\BoostServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000006ab0000000000000000";}}',
         'as' => 'boost.browser-logs',
         'excluded_middleware' => 
         array (
@@ -1150,7 +1324,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::FfuO9RBN4dgJRJaN' => 
+    'generated::tnOIbe7WmeV64sW8' => 
     array (
       'methods' => 
       array (
@@ -1186,8 +1360,8 @@ app('router')->setCompiledRoutes(
                     return response(\\Illuminate\\Support\\Facades\\View::file(\'C:\\\\laragon\\\\www\\\\transventasguatemala\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Configuration\'.\'/../resources/health-up.blade.php\', [
                         \'exception\' => $exception,
                     ]), status: $status);
-                }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"00000000000006e30000000000000000";}}',
-        'as' => 'generated::FfuO9RBN4dgJRJaN',
+                }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"00000000000006ea0000000000000000";}}',
+        'as' => 'generated::tnOIbe7WmeV64sW8',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1499,7 +1673,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::aa4paaHkr8tWBhZy' => 
+    'generated::XjstDQqefHN3e96C' => 
     array (
       'methods' => 
       array (
@@ -1520,7 +1694,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::aa4paaHkr8tWBhZy',
+        'as' => 'generated::XjstDQqefHN3e96C',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1574,7 +1748,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::KxAiYkiqlfQtTKFp' => 
+    'generated::B8C9AurUybFcnnWz' => 
     array (
       'methods' => 
       array (
@@ -1595,7 +1769,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::KxAiYkiqlfQtTKFp',
+        'as' => 'generated::B8C9AurUybFcnnWz',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1915,7 +2089,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::nNEjvsSgSzq5qgI1' => 
+    'generated::4yHBWLjxDesQInQ6' => 
     array (
       'methods' => 
       array (
@@ -1936,7 +2110,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::nNEjvsSgSzq5qgI1',
+        'as' => 'generated::4yHBWLjxDesQInQ6',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2119,7 +2293,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'O:55:"Laravel\\SerializableClosure\\UnsignedSerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:60:"function () {
         return \\view(\'admin.dashboard\');
-    }";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000006f90000000000000000";}}',
+    }";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000007080000000000000000";}}',
         'as' => 'admin.dashboard',
         'namespace' => NULL,
         'prefix' => '/admin',
@@ -2738,7 +2912,7 @@ app('router')->setCompiledRoutes(
     }
     return \\redirect()->route(\'home\');
 
-    }";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000006e60000000000000000";}}',
+    }";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000006f50000000000000000";}}',
         'namespace' => NULL,
         'prefix' => '',
         'where' => 
@@ -3022,6 +3196,307 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
+    'admin.contacts.send-response' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'admin/contacts/{contact}/send-response',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\ContactController@sendResponse',
+        'controller' => 'App\\Http\\Controllers\\Admin\\ContactController@sendResponse',
+        'as' => 'admin.contacts.send-response',
+        'namespace' => NULL,
+        'prefix' => '/admin',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'user.messages.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'mis-mensajes',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\UserMessageController@index',
+        'controller' => 'App\\Http\\Controllers\\UserMessageController@index',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'user.messages.index',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'user.messages.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'mis-mensajes/{contact}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\UserMessageController@show',
+        'controller' => 'App\\Http\\Controllers\\UserMessageController@show',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'user.messages.show',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'user.messages.send' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'mis-mensajes/{contact}/enviar',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\UserMessageController@sendMessage',
+        'controller' => 'App\\Http\\Controllers\\UserMessageController@sendMessage',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'user.messages.send',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'user.messages.mark-read' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'mis-mensajes/{id}/mark-read',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\UserMessageController@markAsRead',
+        'controller' => 'App\\Http\\Controllers\\UserMessageController@markAsRead',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'user.messages.mark-read',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'user.messages.unread-count' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'mis-mensajes/unread/count',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\UserMessageController@getUnreadCount',
+        'controller' => 'App\\Http\\Controllers\\UserMessageController@getUnreadCount',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'user.messages.unread-count',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'contact.conversation' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'vehiculos/{vehicle}/conversacion',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\ContactController@getConversation',
+        'controller' => 'App\\Http\\Controllers\\ContactController@getConversation',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'contact.conversation',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'contact.send-message' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'vehiculos/{vehicle}/enviar-mensaje',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\ContactController@sendMessageFromDetail',
+        'controller' => 'App\\Http\\Controllers\\ContactController@sendMessageFromDetail',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'contact.send-message',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
     'storage.local' => 
     array (
       'methods' => 
@@ -3038,7 +3513,7 @@ app('router')->setCompiledRoutes(
                         $config,
                         $isProduction
                     ))($request, $path);
-                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000007060000000000000000";}}',
+                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000007150000000000000000";}}',
         'as' => 'storage.local',
       ),
       'fallback' => false,
@@ -3071,7 +3546,7 @@ app('router')->setCompiledRoutes(
                         $config,
                         $isProduction
                     ))($request, $path);
-                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000007150000000000000000";}}',
+                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000007300000000000000000";}}',
         'as' => 'storage.local.upload',
       ),
       'fallback' => false,

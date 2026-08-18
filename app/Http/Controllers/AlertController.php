@@ -37,7 +37,6 @@ class AlertController extends Controller
         ]);
 
         $alert = Auth::user()->alerts()->create($validated);
-
         $matchingVehicles = $this->getMatchingVehicles($alert);
 
         return redirect()->route('alerts.index')
@@ -45,10 +44,8 @@ class AlertController extends Controller
             ->with('matching_count', $matchingVehicles->count());
     }
 
-    // ✅ CORREGIDO: Sin authorize()
     public function edit(Alert $alert)
     {
-        // Verificar que la alerta pertenece al usuario
         if ($alert->user_id !== Auth::id()) {
             abort(403, 'No tienes permiso para editar esta alerta');
         }
@@ -58,10 +55,8 @@ class AlertController extends Controller
         return view('alerts.edit', compact('alert', 'types', 'brands'));
     }
 
-    // ✅ CORREGIDO: Sin authorize()
     public function update(Request $request, Alert $alert)
     {
-        // Verificar que la alerta pertenece al usuario
         if ($alert->user_id !== Auth::id()) {
             abort(403, 'No tienes permiso para editar esta alerta');
         }
@@ -84,10 +79,8 @@ class AlertController extends Controller
             ->with('success', '✅ Alerta actualizada exitosamente');
     }
 
-    // ✅ CORREGIDO: Sin authorize()
     public function toggle(Alert $alert)
     {
-        // Verificar que la alerta pertenece al usuario
         if ($alert->user_id !== Auth::id()) {
             return response()->json([
                 'success' => false,
@@ -104,10 +97,8 @@ class AlertController extends Controller
         ]);
     }
 
-    // ✅ CORREGIDO: Sin authorize()
     public function destroy(Alert $alert)
     {
-        // Verificar que la alerta pertenece al usuario
         if ($alert->user_id !== Auth::id()) {
             abort(403, 'No tienes permiso para eliminar esta alerta');
         }
@@ -118,7 +109,7 @@ class AlertController extends Controller
             ->with('success', '🗑️ Alerta eliminada correctamente');
     }
 
-    private function getMatchingVehicles(Alert $alert)
+    public function getMatchingVehicles(Alert $alert)
     {
         $query = Vehicle::available();
 
@@ -156,28 +147,5 @@ class AlertController extends Controller
         }
 
         return $query->get();
-    }
-
-    public static function checkAlerts()
-    {
-        $alerts = Alert::where('is_active', true)->get();
-        $results = [];
-
-        foreach ($alerts as $alert) {
-            $controller = new self();
-            $vehicles = $controller->getMatchingVehicles($alert);
-            
-            if ($vehicles->count() > 0) {
-                $results[] = [
-                    'alert' => $alert,
-                    'vehicles' => $vehicles,
-                    'count' => $vehicles->count()
-                ];
-                
-                $alert->update(['last_sent_at' => now()]);
-            }
-        }
-
-        return $results;
     }
 }

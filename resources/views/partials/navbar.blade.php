@@ -120,45 +120,68 @@
                             <span>{{ auth()->user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" style="background: #1a1a3e; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 8px 0; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
-                           
-                            <li>
-                                <a class="dropdown-item" href="{{ route('alerts.index') }}" 
-                                   style="color: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 8px; margin: 2px 8px; transition: all 0.3s;">
-                                    <i class="fas fa-regular fa-bell text-white me-2"></i> Mis Alertas
-                                </a>
-                            </li>
+    
+                        <li>
+                            <a class="dropdown-item" href="{{ route('favorites.index') }}" 
+                            style="color: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 8px; margin: 2px 8px; transition: all 0.3s;">
+                                <i class="fas fa-heart text-danger me-2"></i> Mis Favoritos
+                                @php
+                                    $favoritosCount = auth()->user()->favorites()->count();
+                                @endphp
+                                @if($favoritosCount > 0)
+                                    <span class="badge bg-danger float-end">{{ $favoritosCount }}</span>
+                                @endif
+                            </a>
+                        </li>
 
-                             <li>
-                                <a class="dropdown-item" href="{{ route('favorites.index') }}" 
-                                   style="color: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 8px; margin: 2px 8px; transition: all 0.3s;">
-                                    <i class="fas fa-heart text-danger me-2"></i> Mis Favoritos
-                                    @php
-                                        $favoritosCount = auth()->user()->favorites()->count();
-                                    @endphp
-                                    @if($favoritosCount > 0)
-                                        <span class="badge bg-danger float-end">{{ $favoritosCount }}</span>
-                                    @endif
+                        <li>
+                            <a class="dropdown-item" href="{{ route('alerts.index') }}" 
+                            style="color: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 8px; margin: 2px 8px; transition: all 0.3s;">
+                                <i class="fas fa-bell text-warning me-2"></i> Mis Alertas
+                                @php
+                                    $alertasCount = auth()->user()->alerts()->where('is_active', true)->count();
+                                @endphp
+                                @if($alertasCount > 0)
+                                    <span class="badge bg-warning text-dark float-end">{{ $alertasCount }}</span>
+                                @endif
+                            </a>
+                        </li>
+
+                        <!-- ✅ MIS MENSAJES -->
+                        <li>
+                            <a class="dropdown-item" href="{{ route('user.messages.index') }}" 
+                            style="color: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 8px; margin: 2px 8px; transition: all 0.3s;">
+                                <i class="fas fa-envelope text-primary me-2"></i> Mis Mensajes
+                                @php
+                                    $mensajesCount = auth()->user()->unreadMessageNotifications()->count();
+                                @endphp
+                                @if($mensajesCount > 0)
+                                    <span class="badge bg-danger float-end">{{ $mensajesCount }}</span>
+                                @endif
+                            </a>
+                        </li>
+                        
+                        @if(auth()->user()->is_admin)
+                            <li>
+                                <a class="dropdown-item" href="{{ route('admin.dashboard') }}" 
+                                style="color: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 8px; margin: 2px 8px; transition: all 0.3s;">
+                                    <i class="fas fa-cog me-2"></i> Panel Admin
                                 </a>
                             </li>
-                            @if(auth()->user()->is_admin)
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('admin.dashboard') }}" 
-                                       style="color: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 8px; margin: 2px 8px; transition: all 0.3s;">
-                                        <i class="fas fa-cog me-2"></i> Panel Admin
-                                    </a>
-                                </li>
-                            @endif
-                            <li><hr class="dropdown-divider" style="border-color: rgba(255,255,255,0.1); margin: 4px 8px;"></li>
-                            <li>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item" 
-                                            style="color: #ff6b6b; padding: 10px 20px; border-radius: 8px; margin: 2px 8px; transition: all 0.3s; width: 100%; text-align: left; background: none; border: none;">
-                                        <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
-                                    </button>
-                                </form>
-                            </li>
-                        </ul>
+                        @endif
+                        
+                        <li><hr class="dropdown-divider" style="border-color: rgba(255,255,255,0.1); margin: 4px 8px;"></li>
+                        
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="dropdown-item" 
+                                        style="color: #ff6b6b; padding: 10px 20px; border-radius: 8px; margin: 2px 8px; transition: all 0.3s; width: 100%; text-align: left; background: none; border: none;">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
                     </li>
                 @else
                     <li class="nav-item">

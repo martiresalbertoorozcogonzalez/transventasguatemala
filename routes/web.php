@@ -6,8 +6,10 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\Admin\VehicleController as AdminVehicleController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ContactController;
+
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\UserMessageController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -109,3 +111,43 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/alerts/{alert}/toggle', [AlertController::class, 'toggle'])->name('alerts.toggle');
     Route::delete('/alerts/{alert}', [AlertController::class, 'destroy'])->name('alerts.destroy');
 });
+
+// Rutas admin para mensajes
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('contacts', AdminContactController::class)->only(['index', 'show', 'destroy']);
+    Route::post('/contacts/{contact}/responded', [AdminContactController::class, 'markAsResponded'])->name('contacts.responded');
+    Route::post('/contacts/{contact}/send-response', [AdminContactController::class, 'sendResponse'])->name('contacts.send-response');
+});
+
+
+// Rutas de mensajes para usuarios
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/mis-mensajes', [UserMessageController::class, 'index'])->name('user.messages.index');
+    Route::get('/mis-mensajes/{contact}', [UserMessageController::class, 'show'])->name('user.messages.show');
+    Route::post('/mis-mensajes/{contact}/enviar', [UserMessageController::class, 'sendMessage'])->name('user.messages.send');
+    Route::post('/mis-mensajes/{id}/mark-read', [UserMessageController::class, 'markAsRead'])->name('user.messages.mark-read');
+    Route::get('/mis-mensajes/unread/count', [UserMessageController::class, 'getUnreadCount'])->name('user.messages.unread-count');
+});
+
+
+// Rutas de chat para el detalle del vehículo
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/vehiculos/{vehicle}/conversacion', [ContactController::class, 'getConversation'])->name('contact.conversation');
+    Route::post('/vehiculos/{vehicle}/enviar-mensaje', [ContactController::class, 'sendMessageFromDetail'])->name('contact.send-message');
+});
+
+
+// Rutas de contacto
+Route::post('/vehiculos/{vehicle}/contactar', [ContactController::class, 'send'])->name('contact.vehicle');
+
+// Rutas de mensajes para usuarios
+Route::middleware(['auth'])->group(function () {
+    Route::get('/mis-mensajes', [UserMessageController::class, 'index'])->name('user.messages.index');
+    Route::get('/mis-mensajes/{contact}', [UserMessageController::class, 'show'])->name('user.messages.show');
+    Route::post('/mis-mensajes/{contact}/enviar', [UserMessageController::class, 'sendMessage'])->name('user.messages.send');
+    Route::get('/mis-mensajes/unread/count', [UserMessageController::class, 'getUnreadCount'])->name('user.messages.unread-count');
+});
+

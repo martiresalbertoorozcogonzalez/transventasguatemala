@@ -68,4 +68,20 @@ class User extends Authenticatable
     }
 
 
+    public function messageNotifications()
+    {
+        return $this->hasMany(UserMessageNotification::class);
+    }
+
+    public function unreadMessageNotifications()
+    {
+        return $this->messageNotifications()->where('is_read', false);
+    }
+
+    public function getUnreadMessagesCountAttribute()
+    {
+        return $this->unreadMessageNotifications()->count();
+    }
+
+
 }

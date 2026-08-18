@@ -14,18 +14,18 @@
     <!-- ============================================ -->
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-            <li class="breadcrumb-item"><a href="/vehiculos">Vehículos</a></li>
+            <li class="breadcrumb-item"><a href="/" class="text-decoration-none">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="/vehiculos" class="text-decoration-none">Vehículos</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ Str::limit($vehicle->title, 40) }}</li>
         </ol>
     </nav>
 
-    <div class="row">
+    <div class="row g-4">
         <!-- ============================================ -->
         <!-- COLUMNA IZQUIERDA: GALERÍA DE IMÁGENES -->
         <!-- ============================================ -->
-        <div class="col-lg-7 mb-4">
-            <div class="card shadow-sm border-0">
+        <div class="col-lg-7">
+            <div class="card border-0 shadow-sm" style="border-radius: 20px; overflow: hidden;">
                 <div class="card-body p-0">
                     @if($vehicle->images && count($vehicle->images) > 0)
                         <!-- Imagen principal -->
@@ -33,36 +33,37 @@
                             <img src="{{ asset('storage/vehicles/' . $vehicle->images[0]) }}" 
                                  alt="{{ $vehicle->title }}" 
                                  class="img-fluid w-100"
-                                 style="height: 450px; object-fit: contain; object-position: center; background: #ffffff; border-radius: 12px 12px 0 0;"
+                                 style="height: 450px; object-fit: contain; object-position: center; background: linear-gradient(135deg, #f8f9fa, #e9ecef);"
                                  id="mainImage">
                             
-                            <!-- Badges flotantes -->
-                            <span class="position-absolute top-0 end-0 badge bg-{{ $vehicle->status_badge }} m-3 fs-6 p-2">
-                                {{ ucfirst($vehicle->status) }}
-                            </span>
-                            
-                            @if($vehicle->featured)
-                                <span class="position-absolute top-0 start-0 badge bg-warning m-3 fs-6 p-2">
-                                    <i class="fas fa-star"></i> Destacado
+                            <div class="position-absolute top-0 start-0 p-3 d-flex gap-2 flex-wrap">
+                                @if($vehicle->featured)
+                                    <span class="badge bg-warning text-dark px-3 py-2 rounded-pill shadow-sm">
+                                        <i class="fas fa-star me-1"></i> Destacado
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="position-absolute top-0 end-0 p-3">
+                                <span class="badge bg-{{ $vehicle->status_badge }} px-3 py-2 rounded-pill shadow-sm fs-6">
+                                    {{ ucfirst($vehicle->status) }}
                                 </span>
-                            @endif
-                            
-                            <!-- Contador de vistas -->
-                            <span class="position-absolute bottom-0 end-0 badge bg-dark bg-opacity-75 m-3 p-2">
-                                <i class="fas fa-eye"></i> {{ $vehicle->views }} vistas
-                            </span>
+                            </div>
+                            <div class="position-absolute bottom-0 end-0 p-3">
+                                <span class="badge bg-dark bg-opacity-75 px-3 py-2 rounded-pill">
+                                    <i class="fas fa-eye me-1"></i> {{ $vehicle->views }} vistas
+                                </span>
+                            </div>
                         </div>
                         
-                        <!-- Miniaturas -->
                         @if(count($vehicle->images) > 1)
-                        <div class="p-3">
+                        <div class="p-3 bg-light">
                             <div class="row g-2">
                                 @foreach($vehicle->images as $index => $image)
                                     <div class="col-3 col-md-2">
                                         <img src="{{ asset('storage/vehicles/' . $image) }}" 
                                              alt="Imagen {{ $index + 1 }}" 
                                              class="img-fluid rounded cursor-pointer"
-                                             style="height: 80px; width: 100%; object-fit: contain; object-position: center; cursor: pointer; border: 2px solid {{ $index == 0 ? '#0d6efd' : 'transparent' }}; background: #ffffff;"
+                                             style="height: 70px; width: 100%; object-fit: contain; object-position: center; cursor: pointer; border: 2px solid {{ $index == 0 ? '#0d6efd' : 'transparent' }}; background: #ffffff; transition: all 0.3s;"
                                              onclick="changeImage('{{ asset('storage/vehicles/' . $image) }}', this)"
                                              onmouseover="this.style.borderColor='#0d6efd'"
                                              onmouseout="this.style.borderColor='{{ $index == 0 ? '#0d6efd' : 'transparent' }}'">
@@ -73,9 +74,9 @@
                         @endif
                     @else
                         <div class="bg-light d-flex align-items-center justify-content-center" 
-                             style="height: 450px; border-radius: 12px;">
+                             style="height: 450px; border-radius: 20px;">
                             <div class="text-center">
-                                <i class="fas fa-truck fa-6x text-muted"></i>
+                                <i class="fas fa-truck fa-6x text-muted" style="opacity: 0.3;"></i>
                                 <p class="text-muted mt-3">Sin imágenes disponibles</p>
                             </div>
                         </div>
@@ -83,24 +84,21 @@
                 </div>
             </div>
 
-            <!-- REDES SOCIALES -->
-            <div class="card shadow-sm border-0 mt-3">
+            <!-- Redes Sociales -->
+            <div class="card border-0 shadow-sm mt-3" style="border-radius: 16px;">
                 <div class="card-body">
                     <div class="d-flex align-items-center gap-3 flex-wrap">
-                        <span class="fw-bold"><i class="fas fa-share-alt"></i> Síguenos en:</span>
+                        <span class="fw-bold text-muted"><i class="fas fa-share-alt me-2"></i>Síguenos en:</span>
                         <a href="https://www.facebook.com/TransVentasGuatemala" target="_blank" 
-                           class="btn btn-outline-primary btn-sm rounded-pill px-3"
-                           style="font-weight: 500; border-width: 2px;">
+                           class="btn btn-outline-primary btn-sm rounded-pill px-3">
                             <i class="fab fa-facebook-f me-1"></i> Facebook
                         </a>
                         <a href="https://www.instagram.com/TransVentasGuatemala" target="_blank" 
-                           class="btn btn-outline-danger btn-sm rounded-pill px-3"
-                           style="font-weight: 500; border-width: 2px;">
+                           class="btn btn-outline-danger btn-sm rounded-pill px-3">
                             <i class="fab fa-instagram me-1"></i> Instagram
                         </a>
                         <a href="https://www.tiktok.com/@TransVentasGuatemala" target="_blank" 
-                           class="btn btn-outline-dark btn-sm rounded-pill px-3"
-                           style="font-weight: 500; border-width: 2px;">
+                           class="btn btn-outline-dark btn-sm rounded-pill px-3">
                             <i class="fab fa-tiktok me-1"></i> TikTok
                         </a>
                     </div>
@@ -109,53 +107,20 @@
         </div>
 
         <!-- ============================================ -->
-        <!-- COLUMNA DERECHA: INFORMACIÓN DEL VEHÍCULO -->
+        <!-- COLUMNA DERECHA: INFORMACIÓN + CHAT -->
         <!-- ============================================ -->
         <div class="col-lg-5">
-            <div class="card shadow-sm border-0 sticky-top" style="top: 20px;">
-                <div class="card-body">
+            <div class="card border-0 shadow-sm sticky-top" style="top: 20px; border-radius: 20px; overflow: hidden;">
+                <div class="card-body p-4">
                     <!-- Título -->
-                    <h2 class="card-title mb-2">{{ $vehicle->title }}</h2>
-                    
-                    <!-- Estado y destacado -->
-                    <div class="mb-3">
-                        <span class="badge bg-{{ $vehicle->status_badge }} fs-6 p-2 me-2">
-                            {{ ucfirst($vehicle->status) }}
-                        </span>
-                        @if($vehicle->featured)
-                            <span class="badge bg-warning fs-6 p-2">
-                                <i class="fas fa-star"></i> Destacado
-                            </span>
-                        @endif
-                    </div>
+                    <h2 class="card-title fw-bold mb-2">{{ $vehicle->title }}</h2>
                     
                     <!-- Precio -->
-                    <h3 class="text-primary mb-4">{{ $vehicle->price_formatted }}</h3>
-                    
-                    <!-- ✅ BOTÓN DE FAVORITOS -->
-                    @auth
-                    <div class="mb-3">
-                        <form action="{{ route('favorites.toggle', $vehicle) }}" method="POST" id="favoriteForm">
-                            @csrf
-                            <button type="submit" 
-                                    class="btn w-100 {{ auth()->user()->hasFavorited($vehicle->id) ? 'btn-danger' : 'btn-outline-danger' }}">
-                                <i class="fas fa-heart"></i>
-                                {{ auth()->user()->hasFavorited($vehicle->id) ? ' Eliminar de favoritos' : ' Agregar a favoritos' }}
-                                <span class="badge bg-light text-dark ms-2">{{ $vehicle->favorites()->count() }}</span>
-                            </button>
-                        </form>
-                    </div>
-                    @else
-                    <div class="mb-3">
-                        <a href="{{ route('login') }}" class="btn btn-outline-danger w-100">
-                            <i class="fas fa-heart"></i> Inicia sesión para agregar a favoritos
-                        </a>
-                    </div>
-                    @endauth
+                    <h3 class="text-primary fw-bold mb-3">{{ $vehicle->price_formatted }}</h3>
                     
                     <hr>
                     
-                    <!-- Especificaciones principales -->
+                    <!-- Especificaciones -->
                     <div class="row g-3">
                         <div class="col-6">
                             <small class="text-muted d-block">Tipo</small>
@@ -181,7 +146,7 @@
                             <small class="text-muted d-block">Color</small>
                             <strong>
                                 @if($vehicle->color)
-                                    <span style="display: inline-block; width: 20px; height: 20px; background-color: {{ $vehicle->color }}; border-radius: 50%; border: 1px solid #ddd; vertical-align: middle;"></span>
+                                    <span style="display: inline-block; width: 16px; height: 16px; background-color: {{ $vehicle->color }}; border-radius: 50%; border: 1px solid #ddd; vertical-align: middle;"></span>
                                     {{ $vehicle->color }}
                                 @else
                                     N/A
@@ -210,18 +175,17 @@
                     
                     <!-- Descripción -->
                     <div class="mb-3">
-                        <h6><i class="fas fa-file-alt"></i> Descripción</h6>
-                        <p class="text-justify">{{ $vehicle->description }}</p>
+                        <h6 class="fw-bold"><i class="fas fa-file-alt me-2"></i>Descripción</h6>
+                        <p class="text-muted small">{{ $vehicle->description }}</p>
                     </div>
                     
-                    <!-- Características -->
                     @if($vehicle->features && count($vehicle->features) > 0)
                     <div class="mb-3">
-                        <h6><i class="fas fa-list"></i> Características</h6>
+                        <h6 class="fw-bold"><i class="fas fa-list me-2"></i>Características</h6>
                         <div class="d-flex flex-wrap gap-1">
                             @foreach($vehicle->features as $feature)
-                                <span class="badge bg-success p-2">
-                                    <i class="fas fa-check-circle"></i> {{ $feature }}
+                                <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill">
+                                    <i class="fas fa-check-circle me-1"></i> {{ $feature }}
                                 </span>
                             @endforeach
                         </div>
@@ -230,65 +194,92 @@
                     
                     <hr>
                     
-                  
-                    
-                <!-- ============================================ -->
-                <!-- BOTÓN CONTACTAR VENDEDOR (SOLO REGISTRADOS) -->
-                <!-- ============================================ -->
-                 
-                <div class="d-grid gap-2">
-                @auth
-                    <button class="btn btn-success btn-lg" onclick="contactar()" style="background: linear-gradient(135deg, #28a745, #20c997); border: none;">
-                        <i class="fas fa-envelope me-2"></i> Contactar Vendedor
-                    </button>
-                @else
-                    <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 16px;">
-                        <div class="card-body text-center py-4">
-                            <div class="rounded-circle bg-primary bg-opacity-10 d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
-                                <i class="fas fa-envelope fa-2x text-primary"></i>
+                    <!-- ============================================ -->
+                    <!-- CHAT INTEGRADO CON SCROLL -->
+                    <!-- ============================================ -->
+                    <div class="mt-3">
+                        @auth
+                            <button class="btn btn-primary w-100 rounded-pill py-2 mb-3" id="toggleChatBtn" onclick="toggleChat()" style="background: linear-gradient(135deg, #0d6efd, #0dcaf0); border: none;">
+                                <i class="fas fa-comments me-2"></i> 
+                                <span id="chatBtnText">Ver Conversación</span>
+                                <span class="badge bg-danger ms-2" id="chatBadge" style="display: none;">
+                                    <span id="chatBadgeCount">0</span>
+                                </span>
+                            </button>
+                            
+                            <div id="chatContainer" style="display: none;">
+                                <div class="card border-0 shadow-sm" style="border-radius: 16px; overflow: hidden;">
+                                    <div class="card-header bg-primary text-white py-2" style="border-radius: 0;">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <small class="fw-bold">
+                                                <i class="fas fa-comments me-2"></i> Conversación
+                                            </small>
+                                            <small id="chatStatus" class="badge bg-light text-dark">Cargando...</small>
+                                        </div>
+                                    </div>
+                                    <!-- ✅ CONTENEDOR CON SCROLL - Altura fija -->
+                                    <div class="card-body p-3" id="chatMessages" style="height: 280px; overflow-y: auto; overflow-x: hidden; background: #f8f9fa; display: flex; flex-direction: column;">
+                                        <div class="text-center text-muted py-3" id="chatLoading">
+                                            <div class="spinner-border spinner-border-sm text-primary" role="status">
+                                                <span class="visually-hidden">Cargando...</span>
+                                            </div>
+                                            <p class="mb-0 mt-2 small">Cargando conversación...</p>
+                                        </div>
+                                        <div id="chatContent" style="display: none; flex: 1;"></div>
+                                    </div>
+                                    <div class="card-footer bg-white p-2">
+                                        <form id="chatForm" class="d-flex gap-2">
+                                            @csrf
+                                            <input type="hidden" name="vehicle_id" value="{{ $vehicle->id }}">
+                                            <input type="text" 
+                                                   name="message" 
+                                                   id="chatInput" 
+                                                   class="form-control form-control-sm" 
+                                                   placeholder="Escribe tu mensaje..." 
+                                                   required
+                                                   autocomplete="off"
+                                                   style="border-radius: 20px;">
+                                            <button type="submit" class="btn btn-primary btn-sm rounded-pill px-3" id="chatSendBtn">
+                                                <i class="fas fa-paper-plane"></i>
+                                            </button>
+                                        </form>
+                                        <small class="text-muted d-block text-center mt-1" id="chatInfo" style="font-size: 0.65rem;"></small>
+                                    </div>
+                                </div>
                             </div>
-                            <h5 class="fw-bold">📩 Contacto exclusivo</h5>
-                            <p class="text-muted mb-3">Regístrate gratis para enviar mensajes al vendedor</p>
-                            <div class="d-flex gap-2 justify-content-center flex-wrap">
-                                <a href="{{ route('register') }}" class="btn btn-primary px-4 rounded-pill">
-                                    <i class="fas fa-user-plus"></i> Registrarse
-                                </a>
-                                <a href="{{ route('login') }}" class="btn btn-outline-secondary px-4 rounded-pill">
-                                    <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
-                                </a>
+                        @else
+                            <div class="card border-0 bg-light" style="border-radius: 16px;">
+                                <div class="card-body text-center py-3">
+                                    <i class="fas fa-lock text-muted mb-2"></i>
+                                    <p class="text-muted small mb-0">
+                                        <a href="{{ route('login') }}" class="text-primary fw-bold">Inicia sesión</a> 
+                                        o <a href="{{ route('register') }}" class="text-primary fw-bold">regístrate</a> 
+                                        para ver la conversación.
+                                    </p>
+                                </div>
                             </div>
-                            <p class="text-muted small mt-2">
-                                <i class="fas fa-shield-alt text-success"></i> 100% gratuito y seguro
-                            </p>
-                        </div>
+                        @endauth
                     </div>
-                @endauth
-                
-                <button class="btn btn-outline-primary" onclick="window.print()">
-                    <i class="fas fa-print"></i> Imprimir Ficha
-                </button>
-            </div>
-
+                    
+                    <button class="btn btn-outline-secondary w-100 rounded-pill py-2 mt-2" onclick="window.print()" style="font-size: 0.9rem;">
+                        <i class="fas fa-print me-2"></i> Imprimir Ficha
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- VEHÍCULOS RELACIONADOS -->
-    <!-- ============================================ -->
     @if($related->count() > 0)
     <div class="mt-5">
-        <h4 class="mb-3"><i class="fas fa-truck"></i> Vehículos Relacionados</h4>
-        
-        <div class="row">
+        <h4 class="mb-3 fw-bold">
+            <i class="fas fa-truck me-2"></i>Vehículos Relacionados
+        </h4>
+        <div class="row g-3">
             @foreach($related as $rel)
-            <div class="col-md-3 col-6 mb-3">
+            <div class="col-md-3 col-6">
                 <a href="/vehiculos/{{ $rel->slug }}" class="text-decoration-none d-block">
-                    <div class="card h-100 shadow-sm border-0 hover-card" 
-                         style="border-radius: 16px; overflow: hidden; transition: all 0.3s ease; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
-                        
-                        <div style="width: 100%; height: 150px; background: #ffffff; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 8px;">
+                    <div class="card h-100 border-0 shadow-sm hover-card" style="border-radius: 16px; overflow: hidden; transition: all 0.3s;">
+                        <div style="width: 100%; height: 140px; background: #ffffff; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 8px;">
                             @if($rel->images && count($rel->images) > 0)
                                 <img src="{{ asset('storage/vehicles/' . $rel->images[0]) }}" 
                                      alt="{{ $rel->title }}"
@@ -297,22 +288,13 @@
                                 <i class="fas fa-truck fa-2x text-muted"></i>
                             @endif
                         </div>
-                        
-                        <div class="card-body">
-                            <h6 class="card-title text-dark fw-semibold mb-1" style="font-size: 0.9rem;">
-                                {{ Str::limit($rel->title, 35) }}
+                        <div class="card-body p-2">
+                            <h6 class="card-title text-dark fw-semibold mb-1" style="font-size: 0.8rem;">
+                                {{ Str::limit($rel->title, 30) }}
                             </h6>
-                            <p class="text-primary fw-bold mb-1" style="font-size: 0.95rem;">
+                            <p class="text-primary fw-bold mb-0" style="font-size: 0.85rem;">
                                 {{ $rel->price_formatted }}
                             </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-2 py-1" style="font-size: 0.7rem;">
-                                    {{ ucfirst($rel->type) }}
-                                </span>
-                                <span class="text-muted small">
-                                    <i class="fas fa-calendar"></i> {{ $rel->year }}
-                                </span>
-                            </div>
                         </div>
                     </div>
                 </a>
@@ -323,162 +305,15 @@
     @endif
 </div>
 
-    @auth
-    
-        <!-- ============================================ -->
-        <!-- MODAL DE CONTACTO (SOLO REGISTRADOS) -->
-        <!-- ============================================ -->
-
-        <div class="modal fade" id="contactModal" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header bg-success text-white">
-                        <h5 class="modal-title"><i class="fas fa-envelope"></i> Enviar Mensaje</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ route('contact.vehicle', $vehicle) }}" method="POST" id="contactForm">
-                            @csrf
-                            <input type="hidden" name="vehicle_id" value="{{ $vehicle->id }}">
-                            
-                            <div class="mb-3">
-                                <label class="form-label">Tu nombre <span class="text-danger">*</span></label>
-                                <input type="text" name="name" class="form-control" value="{{ auth()->user()->name }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Tu email <span class="text-danger">*</span></label>
-                                <input type="email" name="email" class="form-control" value="{{ auth()->user()->email }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Teléfono</label>
-                                <input type="tel" name="phone" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Mensaje <span class="text-danger">*</span></label>
-                                <textarea name="message" class="form-control" rows="3" required>Me interesa el vehículo: {{ $vehicle->title }}</textarea>
-                            </div>
-                            <button type="submit" class="btn btn-success w-100">
-                                <i class="fas fa-paper-plane"></i> Enviar mensaje
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    @endauth
-
-<!-- ============================================ -->
-<!-- SCRIPTS -->
-<!-- ============================================ -->
+@push('scripts')
 <script>
-// ============================================
-// FUNCIÓN GLOBAL - CONTACTAR
-// ============================================
-function contactar() {
-    @auth
-        console.log('📧 Abriendo modal de contacto');
-        const modalElement = document.getElementById('contactModal');
-        if (modalElement) {
-            const modal = new bootstrap.Modal(modalElement);
-            modal.show();
-        } else {
-            console.error('❌ Modal no encontrado');
-        }
-    @else
-        window.location.href = "{{ route('login') }}";
-    @endauth
-}
-
-// ============================================
-// FUNCIÓN GLOBAL - TOGGLE FAVORITOS
-// ============================================
-function toggleFavorite(vehicleId, element) {
-    console.log('❤️ Toggle favorite:', vehicleId);
-    
-    const url = `/favorites/${vehicleId}/toggle`;
-    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
-    
-    if (!csrfToken) {
-        console.error('❌ CSRF token no encontrado');
-        return;
-    }
-    
-    // Mostrar loading
-    if (element) {
-        element.disabled = true;
-        const originalHtml = element.innerHTML;
-        element.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
-        element.dataset.originalHtml = originalHtml;
-    }
-    
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': csrfToken,
-            'Accept': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('📦 Data:', data);
-        
-        if (data.redirect) {
-            window.location.href = data.redirect;
-            return;
-        }
-        
-        if (data.success) {
-            // Actualizar el botón en el detalle
-            const btn = document.getElementById('favoriteBtn');
-            const text = document.getElementById('favoriteText');
-            const count = document.getElementById('favoriteCount');
-            
-            if (btn) {
-                if (data.isFavorited) {
-                    btn.className = 'btn btn-danger w-100';
-                    if (text) text.textContent = 'Eliminar de favoritos';
-                } else {
-                    btn.className = 'btn btn-outline-danger w-100';
-                    if (text) text.textContent = 'Agregar a favoritos';
-                }
-            }
-            
-            if (count) {
-                count.textContent = data.count;
-            }
-            
-            // Mostrar mensaje
-            if (data.message) {
-                alert(data.message);
-            }
-        }
-    })
-    .catch(error => {
-        console.error('💥 Error:', error);
-        alert('❌ Error al procesar la solicitud');
-    })
-    .finally(() => {
-        if (element) {
-            element.disabled = false;
-            if (element.dataset.originalHtml) {
-                element.innerHTML = element.dataset.originalHtml;
-            }
-        }
-    });
-}
-
-// ============================================
-// CAMBIAR IMAGEN PRINCIPAL
-// ============================================
 function changeImage(url, element) {
-    const mainImage = document.getElementById('mainImage');
+    var mainImage = document.getElementById('mainImage');
     if (mainImage) {
         mainImage.src = url;
     }
     
-    document.querySelectorAll('.cursor-pointer').forEach(el => {
+    document.querySelectorAll('.cursor-pointer').forEach(function(el) {
         el.style.borderColor = 'transparent';
         el.style.borderWidth = '2px';
     });
@@ -490,81 +325,336 @@ function changeImage(url, element) {
 }
 
 // ============================================
-// ENVÍO DEL FORMULARIO DE CONTACTO
+// CHAT - VARIABLES
 // ============================================
-document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.getElementById('contactForm');
+if (typeof chatVisible === 'undefined') {
+    var chatVisible = false;
+}
+var vehicleId = {{ $vehicle->id }};
+var chatInterval = null;
+
+// ============================================
+// CHAT - TOGGLE
+// ============================================
+function toggleChat() {
+    chatVisible = !chatVisible;
+    var container = document.getElementById('chatContainer');
+    var btnText = document.getElementById('chatBtnText');
     
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+    if (chatVisible) {
+        container.style.display = 'block';
+        btnText.textContent = 'Ocultar Conversación';
+        loadConversation();
+        document.getElementById('chatBadge').style.display = 'none';
+        
+        if (chatInterval) {
+            clearInterval(chatInterval);
+        }
+        chatInterval = setInterval(loadConversation, 10000);
+    } else {
+        container.style.display = 'none';
+        btnText.textContent = 'Ver Conversación';
+        if (chatInterval) {
+            clearInterval(chatInterval);
+            chatInterval = null;
+        }
+    }
+}
+
+// ============================================
+// CHAT - CARGAR CONVERSACIÓN
+// ============================================
+function loadConversation() {
+    var loading = document.getElementById('chatLoading');
+    var content = document.getElementById('chatContent');
+    var status = document.getElementById('chatStatus');
+    var messagesContainer = document.getElementById('chatMessages');
+    
+    if (!loading || !content) return;
+    
+    loading.style.display = 'block';
+    content.style.display = 'none';
+    
+    fetch(`/vehiculos/${vehicleId}/conversacion`, {
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'Accept': 'application/json'
+        }
+    })
+    .then(function(response) {
+        if (!response.ok) {
+            throw new Error('Error al cargar la conversación');
+        }
+        return response.json();
+    })
+    .then(function(data) {
+        loading.style.display = 'none';
+        
+        if (data.success && data.has_conversation) {
+            content.style.display = 'block';
+            renderConversation(data.conversation);
+            status.textContent = data.status === 'respondido' ? '✅ Respondido' : (data.status === 'leido' ? '📖 Leído' : '⏳ Pendiente');
+            status.className = data.status === 'respondido' ? 'badge bg-success' : (data.status === 'leido' ? 'badge bg-warning' : 'badge bg-danger');
+            document.getElementById('chatInfo').textContent = 'Iniciado: ' + data.created_at;
+        } else {
+            content.style.display = 'block';
+            content.innerHTML = `
+                <div class="text-center text-muted py-3">
+                    <i class="fas fa-comment fa-2x mb-2"></i>
+                    <p class="small mb-0">No hay conversación aún.<br>Envía tu primer mensaje.</p>
+                </div>
+            `;
+            status.textContent = '📝 Nuevo';
+            status.className = 'badge bg-secondary';
+            document.getElementById('chatInfo').textContent = 'Escribe tu primer mensaje';
+        }
+        
+        // ✅ SCROLL AL FINAL DESPUÉS DE CARGAR (con mayor retraso y validación)
+        scrollToBottom(messagesContainer);
+    })
+    .catch(function(error) {
+        loading.style.display = 'none';
+        content.style.display = 'block';
+        content.innerHTML = `
+            <div class="alert alert-danger small mb-0">
+                <i class="fas fa-exclamation-circle me-1"></i> Error al cargar la conversación
+            </div>
+        `;
+        console.error('Error:', error);
+    });
+}
+
+// ============================================
+// CHAT - RENDERIZAR CONVERSACIÓN
+// ============================================
+function renderConversation(messages) {
+    var container = document.getElementById('chatContent');
+    var messagesContainer = document.getElementById('chatMessages');
+    var html = '';
+    
+    if (!messages || messages.length === 0) {
+        html = `
+            <div class="text-center text-muted py-3">
+                <p class="small mb-0">No hay mensajes en esta conversación</p>
+            </div>
+        `;
+        container.innerHTML = html;
+        // Aún así, forzamos scroll (aunque no haya mensajes, no hará nada)
+        scrollToBottom(messagesContainer);
+        return;
+    }
+    
+    messages.forEach(function(msg) {
+        var isUser = msg.type === 'user';
+        
+        html += `
+            <div class="d-flex ${isUser ? 'justify-content-start' : 'justify-content-end'} mb-2">
+                <div class="p-2 rounded-3 ${isUser ? 'bg-white' : 'bg-primary text-white'}" 
+                     style="max-width: 80%; ${isUser ? 'border: 1px solid #e9ecef;' : ''}">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <small class="${isUser ? 'text-muted' : 'text-white-50'}" style="font-size: 0.55rem;">
+                            <i class="fas ${isUser ? 'fa-user' : 'fa-user-tie'} me-1"></i>
+                            ${isUser ? 'Tú' : 'Vendedor'}
+                            ${msg.is_original ? ' <span class="badge bg-secondary" style="font-size: 0.45rem;">Original</span>' : ''}
+                        </small>
+                        <small class="${isUser ? 'text-muted' : 'text-white-50'}" style="font-size: 0.5rem;">
+                            ${new Date(msg.created_at).toLocaleTimeString('es-GT', { hour: '2-digit', minute: '2-digit' })}
+                        </small>
+                    </div>
+                    <p class="mb-0 ${isUser ? 'text-dark' : 'text-white'}" style="font-size: 0.8rem; word-break: break-word;">
+                        ${msg.message}
+                    </p>
+                </div>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+    
+    // ✅ SCROLL AL FINAL después de renderizar
+    scrollToBottom(messagesContainer);
+}
+
+// ============================================
+// FUNCIÓN UNIFICADA PARA SCROLL AL FINAL
+// ============================================
+function scrollToBottom(container) {
+    if (!container) return;
+    // Usamos setTimeout para asegurar que el DOM se haya actualizado
+    setTimeout(function() {
+        container.scrollTop = container.scrollHeight;
+        console.log('Scroll ejecutado, altura:', container.scrollHeight); // ← puedes eliminar este log después
+    }, 150); // ← aumento el tiempo a 150ms para mayor seguridad
+}
+
+// ============================================
+// CHAT - ENVIAR MENSAJE
+// ============================================
+document.getElementById('chatForm')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    var input = document.getElementById('chatInput');
+    var message = input.value.trim();
+    var sendBtn = document.getElementById('chatSendBtn');
+    var messagesContainer = document.getElementById('chatMessages');
+    
+    if (!message) return;
+    
+    sendBtn.disabled = true;
+    sendBtn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+    
+    var formData = new FormData(this);
+    
+    fetch(`/vehiculos/${vehicleId}/enviar-mensaje`, {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        if (data.success) {
+            input.value = '';
+            loadConversation();
+            showChatAlert('success', data.message);
             
-            const formData = new FormData(this);
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            const url = this.action;
-            
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Enviando...';
-            
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                    'Accept': 'application/json'
-                },
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Cerrar el modal
-                const modal = bootstrap.Modal.getInstance(document.getElementById('contactModal'));
-                if (modal) {
-                    modal.hide();
+            // ✅ SCROLL DESPUÉS DE ENVIAR (ya se hace dentro de loadConversation)
+        } else {
+            showChatAlert('danger', data.message || 'Error al enviar el mensaje');
+        }
+    })
+    .catch(function(error) {
+        console.error('Error:', error);
+        showChatAlert('danger', 'Error al enviar el mensaje');
+    })
+    .finally(function() {
+        sendBtn.disabled = false;
+        sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+    });
+});
+
+function showChatAlert(type, message) {
+    var container = document.getElementById('chatContainer');
+    if (!container) return;
+    
+    var existingAlerts = container.querySelectorAll('.alert');
+    existingAlerts.forEach(function(el) {
+        el.remove();
+    });
+    
+    var alertDiv = document.createElement('div');
+    alertDiv.className = 'alert alert-' + type + ' alert-dismissible fade show py-2 px-3 mb-2';
+    alertDiv.style.fontSize = '0.8rem';
+    alertDiv.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
+    `;
+    container.insertBefore(alertDiv, container.firstChild);
+    
+    setTimeout(function() {
+        if (alertDiv.parentNode) {
+            alertDiv.remove();
+        }
+    }, 5000);
+}
+
+function checkNewMessages() {
+    fetch('/mis-mensajes/unread/count')
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            if (data.count > 0) {
+                var badge = document.getElementById('chatBadge');
+                var count = document.getElementById('chatBadgeCount');
+                if (badge && count) {
+                    badge.style.display = 'inline';
+                    count.textContent = data.count;
                 }
-                
-                // Mostrar alerta
-                if (data.success) {
-                    alert('✅ ' + data.message);
-                } else {
-                    alert('❌ ' + (data.message || 'Error al enviar'));
-                }
-                
-                this.reset();
-            })
-            .catch(error => {
-                const modal = bootstrap.Modal.getInstance(document.getElementById('contactModal'));
-                if (modal) {
-                    modal.hide();
-                }
-                alert('❌ Error al enviar: ' + error.message);
-            })
-            .finally(() => {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalText;
-            });
+            }
+        })
+        .catch(function(error) {
+            console.error('Error:', error);
+        });
+}
+
+setInterval(checkNewMessages, 30000);
+checkNewMessages();
+
+// ============================================
+// OBSERVADOR PARA DETECTAR CAMBIOS EN EL CONTENIDO Y HACER SCROLL
+// (Esto garantiza que incluso si se agregan mensajes dinámicamente, el scroll funcione)
+// ============================================
+(function setupScrollObserver() {
+    var targetNode = document.getElementById('chatContent');
+    if (!targetNode) return;
+    
+    var observer = new MutationObserver(function(mutations) {
+        // Verificamos si se agregaron nodos o cambiaron el contenido
+        var shouldScroll = false;
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList' || mutation.type === 'characterData') {
+                shouldScroll = true;
+            }
+        });
+        if (shouldScroll) {
+            var container = document.getElementById('chatMessages');
+            scrollToBottom(container);
+        }
+    });
+    
+    observer.observe(targetNode, {
+        childList: true,
+        subtree: true,
+        characterData: true
+    });
+    
+    // También observamos el contenedor principal por si se reemplaza el contenido
+    var parentContainer = document.getElementById('chatMessages');
+    if (parentContainer) {
+        var parentObserver = new MutationObserver(function() {
+            var container = document.getElementById('chatMessages');
+            scrollToBottom(container);
+        });
+        parentObserver.observe(parentContainer, {
+            childList: true,
+            subtree: true,
+            characterData: true
         });
     }
-});
+})();
+
 </script>
+@endpush
 
 <style>
-    .hover-card {
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
     .hover-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
     }
-    .hover-card .card-title {
-        transition: color 0.3s ease;
+    #chatMessages::-webkit-scrollbar {
+        width: 4px;
     }
-    .hover-card:hover .card-title {
-        color: #0d6efd !important;
+    #chatMessages::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
     }
-    .text-justify {
-        text-align: justify;
+    #chatMessages::-webkit-scrollbar-thumb {
+        background: #c1c7cd;
+        border-radius: 10px;
+    }
+    #chatMessages::-webkit-scrollbar-thumb:hover {
+        background: #a0aec0;
+    }
+    .cursor-pointer {
+        transition: all 0.3s ease;
+    }
+    .cursor-pointer:hover {
+        transform: scale(1.05);
     }
     .sticky-top {
         z-index: 1;
